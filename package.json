@@ -1,0 +1,35 @@
+{
+  "name": "fuji_realestate_webBE",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "format": "eslint --fix \"src/**/*.js\" && prettier --write \"src/**/*.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jetcodeteam/fuji_realestate_webBE.git"
+  },
+  "keywords": [],
+  "author": "jetcode",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jetcodeteam/fuji_realestate_webBE/issues"
+  },
+  "homepage": "https://github.com/jetcodeteam/fuji_realestate_webBE#readme",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.2",
+    "eslint": "^6.2.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "prettier": "^1.18.2"
+  }
+}
