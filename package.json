@@ -1,10 +1,11 @@
 {
-  "name": "fuji_realestate_webBE",
+  "name": "fuji_realestate_web_be",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
+    "kill": "pm2 kill",
     "dev": "nodemon server.js",
-    "start": "node server.js",
+    "start": "pm2 start ecosystem.config.js --env production",
     "format": "eslint --fix \"src/**/*.js\" && prettier --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,17 +20,37 @@
     "url": "https://github.com/jetcodeteam/fuji_realestate_webBE/issues"
   },
   "homepage": "https://github.com/jetcodeteam/fuji_realestate_webBE#readme",
-  "description": "",
+  "description": "Fujiwara API Website",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.9",
+    "mongoose-unique-validator": "^2.0.3",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "swagger-jsdoc": "^3.4.0",
+    "swagger-ui-express": "^4.0.7"
   },
   "devDependencies": {
+    "acorn": "^6.3.0",
     "babel-eslint": "^10.0.2",
-    "eslint": "^6.2.0",
-    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "nodemon": "^1.19.1",
     "prettier": "^1.18.2"
+  },
+  "optionalDependencies": {
+    "fsevents": "*"
   }
 }

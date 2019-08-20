@@ -3,5 +3,17 @@
         "node": true,
         "es6": true
     },
-    "extends": "airbnb-base",
+    "extends": [
+        "airbnb",
+        "prettier"
+    ],
+    "plugins": [
+        "prettier"
+    ],
+    "rules": {
+        "comma-dangle": "off",
+        "prettier/prettier": [
+            "error"
+        ]
+    }
 }
