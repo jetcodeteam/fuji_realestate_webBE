@@ -1,11 +1,13 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 const express = require('express');
-const bodyparser = require('body-parser');
-const cors = require('cors');
-const rateLimit = require('express-rate-limit');
 const swaggerUi = require('swagger-ui-express');
 const mongoose = require('mongoose');
+const bodyparser = require('body-parser');
+const cors = require('cors');
+const RateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const RedisStore = require('rate-limit-redis');
 
 // register strategy local, jwt
 require('./middlewares/passport');
@@ -17,13 +19,19 @@ const api = require('./components');
 const app = express();
 
 // register middleware
+app.use(
+  helmet({
+    frameguard: { action: 'sameorigin' },
+  })
+);
 app.use(bodyparser.json());
 app.use(cors());
 app.use(
-  rateLimit({
+  new RateLimit({
+    store: new RedisStore(),
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 100,
-    message: 'Too many requests, please try again after 15 mintutes',
+    delayMs: 0,
   })
 );
 
