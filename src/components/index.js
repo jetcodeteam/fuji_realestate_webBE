@@ -23,7 +23,7 @@ const customers = require('./customer_requests/customers.module');
 router.use('/users', users.controller);
 router.use('/customer_requests', customers.controller);
 router.use(
-  '/posts',
+  '/news',
   passport.authenticate('jwt', { session: false }),
   news.controller
 );

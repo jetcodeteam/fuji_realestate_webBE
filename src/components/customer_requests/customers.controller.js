@@ -127,6 +127,14 @@ router.post('', (req, res) => {
   return res.send('Create a new customer requests');
 });
 
+router.get(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    return res.send('Get one customer requests');
+  }
+);
+
 router.put(
   '/:id',
   passport.authenticate('jwt', { session: false }),

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { sercetkey } = require('../../config');
+const { SERCETKEY } = require('../../config');
 
 const UserSchema = new mongoose.Schema(
   {
@@ -37,7 +37,7 @@ UserSchema.methods.generateJWT = function() {
       id: this._id,
       username: this.username,
     },
-    sercetkey,
+    SERCETKEY,
     {
       expiresIn: '7d',
     }

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const User = require('../components/users/user');
 
-const seedData = (username, email, pwd) => {
+const seedData = (username, pwd) => {
   console.log('🎉 Seeding data...');
   User.findOne({ username }, (err, user) => {
     if (err) {
@@ -11,7 +11,6 @@ const seedData = (username, email, pwd) => {
     if (!user) {
       const admin = new User({
         username,
-        email,
       });
       admin.hashPassword(pwd);
       admin
@@ -27,6 +26,5 @@ const seedData = (username, email, pwd) => {
 
 seedData(
   process.env.USERNAME_ADMIN || 'admin',
-  process.env.EMAIL_ADMIN || 'example@gmail.com',
   process.env.PASSWORD_ADMIN || '123456789'
 );

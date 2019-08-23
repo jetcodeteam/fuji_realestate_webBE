@@ -128,6 +128,10 @@ router.post('', (req, res) => {
   return res.send('Create a new news');
 });
 
+router.get('/:id', (req, res) => {
+  return res.send('Get one news');
+});
+
 router.put('/:id', (req, res) => {
   return res.send('Update a news');
 });

@@ -44,7 +44,7 @@ app.get('/swagger.json', (req, res) => {
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // connecting mongodb
-mongoose.connect(process.env.MONGODB_URI_ADMIN, {
+mongoose.connect(process.env.MONGODB_URI_JETCODE, {
   useNewUrlParser: true,
   autoIndex: false,
 });
