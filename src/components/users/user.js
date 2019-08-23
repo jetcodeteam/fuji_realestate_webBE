@@ -16,15 +16,7 @@ const UserSchema = new mongoose.Schema(
       index: true,
       unique: true,
     },
-    email: {
-      type: String,
-      lowercase: true,
-      required: true,
-      match: /\S+@\S+\.\S+/,
-      index: true,
-      unique: true,
-    },
-    hash: String,
+    hashpwd: String,
   },
   { timestamps: true }
 );
@@ -32,11 +24,11 @@ const UserSchema = new mongoose.Schema(
 UserSchema.plugin(uniqueValidator, { message: 'is already taken.' });
 
 UserSchema.methods.hashPassword = function(pwd) {
-  this.hash = bcryptjs.hashSync(pwd);
+  this.hashpwd = bcryptjs.hashSync(pwd);
 };
 
 UserSchema.methods.verifyPassword = function(pwd) {
-  return bcryptjs.compareSync(pwd, this.hash);
+  return bcryptjs.compareSync(pwd, this.hashpwd);
 };
 
 UserSchema.methods.generateJWT = function() {
@@ -55,15 +47,7 @@ UserSchema.methods.generateJWT = function() {
 UserSchema.methods.toAuthJSON = function() {
   return {
     username: this.username,
-    email: this.email,
     token: this.generateJWT(),
-  };
-};
-
-UserSchema.methods.toInfoJSON = function() {
-  return {
-    username: this.username,
-    email: this.email,
   };
 };
 

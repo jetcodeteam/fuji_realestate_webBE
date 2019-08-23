@@ -29,9 +29,8 @@ app.use(cors());
 app.use(
   new RateLimit({
     store: new RedisStore(),
-    windowMs: 15 * 60 * 1000, // 15 minutes
+    windowMs: 15 * 60 * 1000,
     max: 100,
-    delayMs: 0,
   })
 );
 

@@ -8,6 +8,17 @@ const users = require('./users/users.module');
 const products = require('./products/products.module');
 const customers = require('./customer_requests/customers.module');
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: bearer
+ *         bearerFormat: JWT
+ */
+
 // define routes
 router.use('/users', users.controller);
 router.use('/customer_requests', customers.controller);

@@ -3,6 +3,9 @@ const passport = require('passport');
 
 /**
  * @swagger
+ * tags:
+ *   - name: Users
+ *     description: Operations about user
  * definitions:
  *   User:
  *     type: object
