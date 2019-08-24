@@ -4,7 +4,7 @@ const router = require('express').Router();
 const posts = require('./posts/posts.module');
 const users = require('./users/users.module');
 const products = require('./products/products.module');
-const contacts = require('./contacts/contacts.module');
+const contacts = require('./requests/requests.module');
 
 // define routes
 router.use('/posts', posts.controller);
