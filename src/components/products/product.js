@@ -1,9 +1,28 @@
 const mongoose = require('mongoose');
 
 const ProductSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true },
   imgPath: String,
-  pending: Boolean,
+  square: Number,
+  floor: {
+    type: Number,
+    validate: {
+      validator: Number.isInteger,
+      message: '{VALUE} is not an integer value',
+    },
+  },
+  street: String,
+  ward: String,
+  district: String,
+  city: String,
+  status: {
+    type: Number,
+    validate: {
+      validator: Number.isInteger,
+      message: '{VALUE} is not an integer value',
+    },
+    required: true,
+  },
   option: {
     timestamp: true,
   },
