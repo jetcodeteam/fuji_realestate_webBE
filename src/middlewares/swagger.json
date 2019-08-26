@@ -1,0 +1,773 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Fujiwara API",
+    "version": "1.0.0",
+    "description": "Fujiwara API Website",
+    "contact": {
+      "email": "jetcode@gmail.com"
+    }
+  },
+  "basePath": "/",
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "scheme": "bearer",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/api/customer_requests": {
+      "get": {
+        "tags": [
+          "Customer Requests"
+        ],
+        "name": "GetAllCustomerRequests",
+        "summary": "Get list of record of customer requests with pagination",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create a new customer requests"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customer Requests"
+        ],
+        "name": "CreateCustomerRequests",
+        "summary": "Create a new customer requests",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create a new customer requests"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/api/customer_requests/{id}": {
+      "get": {
+        "tags": [
+          "Customer Requests"
+        ],
+        "name": "GetOneCustomerRequests",
+        "summary": "Get an existing customer request",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of customer requests to get",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "IdObject"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get info of customer requests"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customer Requests"
+        ],
+        "name": "UpdateOneCustomerRequests",
+        "summary": "Update an existing customer requests",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of customer requests to get",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "IdObject"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "customer requests not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Customer Requests"
+        ],
+        "name": "DeleteOneCustomerRequests",
+        "summary": "Delete an existing customer requests",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of customer requests to get",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "IdObject"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "customer requests not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/news": {
+      "get": {
+        "tags": [
+          "News"
+        ],
+        "name": "GetAllNews",
+        "summary": "Get list of record of news with pagination",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create a new news",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/News"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "News"
+        ],
+        "name": "CreateNews",
+        "summary": "Create a new news",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "NewsObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/News"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create a new news",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/News"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/api/news/{id}": {
+      "get": {
+        "tags": [
+          "News"
+        ],
+        "name": "GetOneNews",
+        "summary": "Get an existing news",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of news to get",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "IdObject"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/News"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "News"
+        ],
+        "name": "UpdateOneNews",
+        "summary": "Update an existing news",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of news to get",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "IdObject"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/News"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "news not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "News"
+        ],
+        "name": "DeleteOneNews",
+        "summary": "Delete an existing news",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of news to get",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "IdObject"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "news not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "name": "GetAllProducts",
+        "summary": "Get list of record of products with pagination",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          },
+          {
+            "$ref": "#/components/parameters/sortParam"
+          },
+          {
+            "$ref": "#/components/parameters/orderParam"
+          },
+          {
+            "$ref": "#/components/parameters/filterParam"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create a new product"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "name": "NewProducts",
+        "summary": "Create a new product",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create a new product"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/api/products/{id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "name": "GetOneProducts",
+        "summary": "Get an existing products",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of product to get",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "IdObject"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get info of product"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Products"
+        ],
+        "name": "UpdateOneProducts",
+        "summary": "Update an existing products",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of product to get",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "IdObject"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Products not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "name": "DeleteOneProducts",
+        "summary": "Delete an existing products",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of product to get",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "IdObject"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Products not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "name": "Login",
+        "summary": "Authencate user",
+        "consumes": [
+          "application/json"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Logged in successfully"
+          },
+          "400": {
+            "description": "Username or password is invalid"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string",
+          "format": "password"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "News": {
+        "type": "object",
+        "required": [
+          "title",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "IdObject",
+            "example": "5d5fa766f54a623d45807adb",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "example": "This is a news about house"
+          },
+          "content": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "News": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/News"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "offsetParam": {
+        "in": "query",
+        "name": "offset",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        },
+        "description": "The number of items to skip before starting to collect the result set."
+      },
+      "limitParam": {
+        "in": "query",
+        "name": "limit",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50,
+          "default": 20
+        },
+        "description": "The numbers of items to return."
+      },
+      "sortParam": {
+        "in": "query",
+        "name": "sort",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "default": "_id"
+        },
+        "description": "Sort items return by."
+      },
+      "orderParam": {
+        "in": "query",
+        "name": "order",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "description": "Sort order",
+          "enum": [
+            "ASC",
+            "DESC"
+          ],
+          "default": "ASC"
+        },
+        "description": "Sort order."
+      },
+      "filterParam": {
+        "in": "query",
+        "name": "filter",
+        "required": true,
+        "schema": {
+          "type": "object",
+          "default": {}
+        },
+        "description": "Filter by field format by JSON stringify of Object JS."
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Customer Requests",
+      "description": "Access to customer requests"
+    },
+    {
+      "name": "News",
+      "description": "Everything about News"
+    },
+    {
+      "name": "Products",
+      "description": "Everything about Products"
+    },
+    {
+      "name": "Users",
+      "description": "Operations about user"
+    }
+  ]
+}

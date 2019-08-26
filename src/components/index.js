@@ -17,6 +17,39 @@ const customers = require('./customer_requests/customers.module');
  *         type: http
  *         scheme: bearer
  *         bearerFormat: JWT
+ *     News:
+ *       type: object
+ *       required:
+ *         - title
+ *         - content
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: IdObject
+ *           example: 5d5fa766f54a623d45807adb
+ *         title:
+ *           type: string
+ *           example: This is a news about house
+ *         content:
+ *           type: byte
+ *     NewsPost:
+ *       type: object
+ *       required:
+ *         - title
+ *         - content
+ *       properties:
+ *         title:
+ *           type: string
+ *           example: This is a news about house
+ *         content:
+ *           type: byte
+ *   requestBodies:
+ *     News:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/NewsPost'
+ *     description: Products object that needs to be added to the database
  */
 
 // define routes

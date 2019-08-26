@@ -35,13 +35,9 @@ app.use(
 );
 
 // setup swagger
-const swaggerSpec = require('./middlewares/swagger');
+const swaggerDocument = require('./middlewares/swagger.json');
 
-app.get('/swagger.json', (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(swaggerSpec);
-});
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // connecting mongodb
 mongoose.connect(process.env.MONGODB_URI_JETCODE, {
