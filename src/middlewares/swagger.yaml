@@ -1,0 +1,645 @@
+openapi: 3.0.0
+info:
+  title: Fujiwara API
+  version: 1.0.0
+  description: Fujiwara API Website
+  contact:
+    name: JetCode
+    email: jetcode@gmail.com
+tags:
+  - name: Customer Requests
+    description: Access to customer requests
+  - name: News
+    description: Everything about News
+  - name: Products
+    description: Everything about Products
+  - name: Users
+    description: Operations about user
+paths:
+  /api/customer_requests:
+    get:
+      tags:
+        - Customer Requests
+      operationId: GetAllCustomerRequests
+      summary: Get list of record of customer requests with pagination
+      parameters:
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/sortParam'
+        - $ref: '#/components/parameters/orderParam'
+        - $ref: '#/components/parameters/filterParam'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Create a new customer requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Requests'
+        '400':
+          description: Bad request
+        '401':
+          description: Token is missing or invalid
+    post:
+      tags:
+        - Customer Requests
+      operationId: CreateCustomerRequests
+      summary: Create a new customer requests
+      requestBody:
+        $ref: '#/components/requestBodies/Requests'
+      responses:
+        '201':
+          description: Create a new customer requests
+        '400':
+          description: Bad request
+  '/api/customer_requests/{id}':
+    get:
+      tags:
+        - Customer Requests
+      operationId: GetOneCustomerRequests
+      summary: Get an existing customer request
+      parameters:
+        - name: id
+          in: path
+          description: ID of customer requests to get
+          required: true
+          schema:
+            type: string
+            format: IdObject
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Get an exist item of customer requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Requests'
+        '400':
+          description: Invalid ID supplied
+        '401':
+          description: Token is missing or invalid
+        '404':
+          description: Customer requests not found
+    put:
+      tags:
+        - Customer Requests
+      operationId: UpdateOneCustomerRequests
+      summary: Update an existing customer requests
+      parameters:
+        - name: id
+          in: path
+          description: ID of customer requests to get
+          required: true
+          schema:
+            type: string
+            format: IdObject
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Update items successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Requests'
+        '400':
+          description: Invalid ID supplied
+        '401':
+          description: Token is missing or invalid
+        '404':
+          description: Customer Requests not found
+        '405':
+          description: Validation exception
+    delete:
+      tags:
+        - Customer Requests
+      operationId: DeleteOneCustomerRequests
+      summary: Delete an existing customer requests
+      parameters:
+        - name: id
+          in: path
+          description: ID of customer requests to get
+          required: true
+          schema:
+            type: string
+            format: IdObject
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Delete items successfully
+        '401':
+          description: Token is missing or invalid
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: customer requests not found
+  /api/news:
+    get:
+      tags:
+        - News
+      operationId: GetAllNews
+      summary: Get list of record of news with pagination
+      parameters:
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/sortParam'
+        - $ref: '#/components/parameters/orderParam'
+        - $ref: '#/components/parameters/filterParam'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Get a list of record of news
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/News'
+        '400':
+          description: Bad request
+        '401':
+          description: Token is missing or invalid
+    post:
+      tags:
+        - News
+      operationId: CreateNews
+      summary: Create a new news
+      requestBody:
+        $ref: '#/components/requestBodies/News'
+      security:
+        - bearerAuth: []
+      responses:
+        '201':
+          description: Create a new news
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/News'
+        '400':
+          description: Bad request
+        '401':
+          description: Token is missing or invalid
+  '/api/news/{id}':
+    get:
+      tags:
+        - News
+      operationId: GetOneNews
+      summary: Get an existing news
+      parameters:
+        - name: id
+          in: path
+          description: ID of news to get
+          required: true
+          schema:
+            type: string
+            format: IdObject
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Get an exist item of news
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/News'
+        '401':
+          description: Token is missing or invalid
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: News not found
+    put:
+      tags:
+        - News
+      operationId: UpdateOneNews
+      summary: Update an existing news
+      parameters:
+        - name: id
+          in: path
+          description: ID of news to get
+          required: true
+          schema:
+            type: string
+            format: IdObject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/News'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Update items successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/News'
+        '400':
+          description: Invalid ID supplied
+        '401':
+          description: Token is missing or invalid
+        '404':
+          description: News not found
+        '405':
+          description: Validation exception
+    delete:
+      tags:
+        - News
+      operationId: DeleteOneNews
+      summary: Delete an existing news
+      parameters:
+        - name: id
+          in: path
+          description: ID of news to get
+          required: true
+          schema:
+            type: string
+            format: IdObject
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Delete item successfully
+        '400':
+          description: Invalid ID supplied
+        '401':
+          description: Token is missing or invalid
+        '404':
+          description: News not found
+        '405':
+          description: Validation exception
+  /api/products:
+    get:
+      tags:
+        - Products
+      operationId: GetAllProducts
+      summary: Get list of record of products with pagination
+      parameters:
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/sortParam'
+        - $ref: '#/components/parameters/orderParam'
+        - $ref: '#/components/parameters/filterParam'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Create a new product
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Products'
+        '401':
+          description: Token is missing or invalid
+        '400':
+          description: Bad request
+    post:
+      tags:
+        - Products
+      operationId: NewProducts
+      summary: Create a new product
+      description: Upload array files not allowed on swagger
+      requestBody:
+        $ref: '#/components/requestBodies/Products'
+      security:
+        - bearerAuth: []
+      responses:
+        '201':
+          description: Create a new product
+        '400':
+          description: Bad request
+      deprecated: true
+  '/api/products/{id}':
+    get:
+      tags:
+        - Products
+      operationId: GetOneProducts
+      summary: Get an existing products
+      parameters:
+        - name: id
+          in: path
+          description: ID of product to get
+          required: true
+          schema:
+            type: string
+            format: IdObject
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Get an exist item of product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        '401':
+          description: Token is missing or invalid
+        '400':
+          description: Invalid ID supplied
+        '405':
+          description: Validation exception
+    put:
+      tags:
+        - Products
+      operationId: UpdateOneProducts
+      summary: Update an existing products
+      parameters:
+        - name: id
+          in: path
+          description: ID of product to get
+          required: true
+          schema:
+            type: string
+            format: IdObject
+      requestBody:
+        $ref: '#/components/requestBodies/Products'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Update items successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        '401':
+          description: Token is missing or invalid
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Products not found
+        '405':
+          description: Validation exception
+      deprecated: true
+    delete:
+      tags:
+        - Products
+      operationId: DeleteOneProducts
+      summary: Delete an existing products
+      parameters:
+        - name: id
+          in: path
+          description: ID of product to get
+          required: true
+          schema:
+            type: string
+            format: IdObject
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Delete items successfully
+        '400':
+          description: Invalid ID supplied
+        '401':
+          description: Token is missing or invalid
+        '404':
+          description: Products not found
+  /api/users/login:
+    post:
+      tags:
+        - Users
+      operationId: Login
+      summary: Authencate user
+      requestBody:
+        $ref: '#/components/requestBodies/Users'
+      responses:
+        '200':
+          description: Logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: example
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUqweADCasSVasd125cCI6IkpXVCJ9.eyJpZCI6IjVkNWZhNzY2ZjU0YTYyM2Q0NTgwN2FkYiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE1NjY4Mzc1OTksImV4cCI6MTU2NzQ0MjM5OX0.CnHt70fzNQ6oDRSA4GdhC9ewWWUpt_pXLkqcqKQzURw
+        '400':
+          description: Username or password is invalid
+components:
+  securitySchemes:
+    bearerAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    User:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          format: password
+    News:
+      type: object
+      required:
+        - title
+        - content
+      properties:
+        id:
+          type: string
+          format: IdObject
+          example: 5d5fa766f54a623d45807adb
+          readOnly: true
+          description: Auto generate ID
+        title:
+          type: string
+          example: This is a news about house
+        content:
+          type: string
+          format: byte
+    Products:
+      type: object
+      required:
+        - name
+        - images
+        - square
+        - floor
+        - district
+        - city
+        - status
+      properties:
+        id:
+          type: string
+          format: IdObject
+          example: 5d5fa766f54a623d45807adb
+          readOnly: true
+          description: Auto generate ID
+        name:
+          type: string
+          example: This is name of products
+        images:
+          type: array
+          items:
+            type: string
+            format: binary
+          description: Use Postman instead of swagger
+        square:
+          type: number
+          format: float
+          example: 100
+        floor:
+          type: number
+          format: float
+          example: 2.5
+        street:
+          type: string
+          example: Nguyen Thi Minh Khai
+        ward:
+          type: string
+          example: Pham Ngu Lao
+        district:
+          type: string
+          example: District 1
+        city:
+          type: string
+          example: HCM City
+        status:
+          type: string
+          enum: [0, 1]
+          default: 0
+          description: >
+            Status of products:
+             * `0` - Selling
+             * `1` - Sold
+    Requests:
+      type: object
+      required:
+        - topic
+        - content
+        - phone
+        - email
+        - status
+      properties:
+        id:
+          type: string
+          format: IdObject
+          example: 5d5fa766f54a623d45807adb
+          readOnly: true
+          description: Auto generate ID
+        topic:
+          type: string
+          example: This is topic of customer requests
+          description: Topic of customer want to mention
+        content:
+          type: string
+          example: This is content of customer requests
+          description: Detail of topic
+        product:
+          type: string
+          format: IdObject
+          example: ''
+          description: Product be mentioned
+        phone:
+          type: number
+          format: int
+          example: 0123456789
+          description: Contact of customer
+        email:
+          type: string
+          format: email
+          example: example@gmail.com
+          description: Contact of customer
+        status:
+          type: string
+          enum: [0, 1]
+          default: 0
+          description: >
+            Status of products:
+             * `0` - Pending
+             * `1` - Handled
+  requestBodies:
+    News:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/News'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/News'
+    Products:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Products'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Products'
+    Requests:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Requests'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Requests'
+    Users:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/User'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+  parameters:
+    offsetParam:
+      in: query
+      name: offset
+      required: true
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      description: The number of items to skip before starting to collect the result set.
+    limitParam:
+      in: query
+      name: limit
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 10
+      description: The numbers of items to return.
+    sortParam:
+      in: query
+      name: sort
+      required: true
+      schema:
+        type: string
+        default: 'id'
+      description: Sort items return by.
+    orderParam:
+      in: query
+      name: order
+      required: true
+      schema:
+        type: string
+        description: Sort order
+        enum: [ASC, DESC]
+        default: ASC
+      description: Sort order.
+    filterParam:
+      in: query
+      name: filter
+      required: true
+      schema:
+        type: object
+        default: {}
+      description: Filter by field format by JSON stringify of Object JS.

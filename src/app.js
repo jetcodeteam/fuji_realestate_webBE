@@ -8,6 +8,7 @@ const cors = require('cors');
 const RateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const RedisStore = require('rate-limit-redis');
+const YAML = require('yamljs');
 
 // register strategy local, jwt
 require('./middlewares/passport');
@@ -35,8 +36,7 @@ app.use(
 );
 
 // setup swagger
-const swaggerDocument = require('./middlewares/swagger.json');
-
+const swaggerDocument = YAML.load(`${__dirname}/middlewares/swagger.yaml`);
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // connecting mongodb
