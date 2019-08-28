@@ -1,43 +1,17 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 const express = require('express');
-const swaggerUi = require('swagger-ui-express');
 const mongoose = require('mongoose');
-const bodyparser = require('body-parser');
-const cors = require('cors');
-const RateLimit = require('express-rate-limit');
-const helmet = require('helmet');
-const RedisStore = require('rate-limit-redis');
-const YAML = require('yamljs');
-
-// register strategy local, jwt
-require('./middlewares/passport');
+const middlewares = require('./middlewares');
 
 // root api
-const api = require('./components');
+const apiRouter = require('./components');
 
 // init app
 const app = express();
 
-// register middleware
-app.use(
-  helmet({
-    frameguard: { action: 'sameorigin' },
-  })
-);
-app.use(bodyparser.json());
-app.use(cors());
-app.use(
-  new RateLimit({
-    store: new RedisStore(),
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-  })
-);
-
-// setup swagger
-const swaggerDocument = YAML.load(`${__dirname}/middlewares/swagger.yaml`);
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// init middlewares
+middlewares.apply(app);
 
 // connecting mongodb
 mongoose.connect(process.env.MONGODB_URI_JETCODE, {
@@ -49,14 +23,8 @@ if (process.env.NODE_ENV === 'development') mongoose.set('debug', true);
 // init admin user
 require('./config/initAdminUser');
 
-// logger
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
-});
-
 // register api
-app.use('/api', api);
+app.use('/api', apiRouter);
 
 // Not found
 app.use((req, res, next) =>

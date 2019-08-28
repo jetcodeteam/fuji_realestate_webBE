@@ -8,6 +8,7 @@ const config = require('../config');
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 
+// authenticate user
 passport.use(
   new LocalStrategy(
     {
@@ -25,6 +26,7 @@ passport.use(
   )
 );
 
+// authorize token of user
 passport.use(
   new JWTStrategy(
     {
