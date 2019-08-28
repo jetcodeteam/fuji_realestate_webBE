@@ -2,29 +2,24 @@
 const mongoose = require('mongoose');
 const User = require('../components/users/user');
 
-const seedData = (username, pwd, role) => {
+const seedData = async (username, pwd, role) => {
   console.log('🎉 Seeding data...');
-  User.findOne({ username }, (err, user) => {
-    if (err) {
-      console.log(err);
-      process.exit(1);
-    }
+  try {
+    const user = await User.findOne({ username });
     if (!user) {
       const admin = new User({
         username,
         role,
       });
       admin.hashPassword(pwd);
-      admin
-        .save()
-        .then(doc => console.log(`🎉 Data created ${doc}`))
-        .catch(error => {
-          console.log(error);
-          process.exit(1);
-        });
+      const doc = await admin.save();
+      console.log(`🎉 Data created ${doc}`);
     } else console.log('🎉 Data already created');
-    process.exit(0);
-  });
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+  process.exit(0);
 };
 
 // connecting mongodb
