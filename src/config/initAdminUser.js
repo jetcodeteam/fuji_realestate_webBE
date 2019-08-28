@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+const mongoose = require('mongoose');
 const User = require('../components/users/user');
 
 const seedData = (username, pwd, role) => {
@@ -22,8 +23,16 @@ const seedData = (username, pwd, role) => {
           process.exit(1);
         });
     } else console.log('🎉 Data already created');
+    process.exit(0);
   });
 };
+
+// connecting mongodb
+mongoose.connect(process.env.MONGODB_URI_JETCODE, {
+  useNewUrlParser: true,
+  autoIndex: false,
+});
+if (process.env.NODE_ENV === 'development') mongoose.set('debug', true);
 
 seedData(
   process.env.USERNAME_ADMIN || 'admin',

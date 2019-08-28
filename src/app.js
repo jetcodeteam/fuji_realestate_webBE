@@ -20,9 +20,6 @@ mongoose.connect(process.env.MONGODB_URI_JETCODE, {
 });
 if (process.env.NODE_ENV === 'development') mongoose.set('debug', true);
 
-// init admin user
-require('./config/initAdminUser');
-
 // register api
 app.use('/api', apiRouter);
 

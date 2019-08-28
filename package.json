@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
+    "seed": "node src/config/initAdminUser.js",
     "kill": "pm2 kill",
-    "dev": "nodemon server.js",
-    "start": "pm2 start ecosystem.config.js --env production",
+    "dev": "npm run seed && nodemon server.js",
+    "start": "npm run seed && pm2 start ecosystem.config.js --env production",
     "format": "eslint --fix \"src/**/*.js\" && prettier --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
