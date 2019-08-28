@@ -4,19 +4,19 @@ const passport = require('passport');
 const uploadFile = require('../middlewares/multer');
 
 // routes api
-const news = require('./news/news.module');
+const articles = require('./articles/articles.module');
 const users = require('./users/users.module');
 const products = require('./products/products.module');
-const customers = require('./customer_requests/customers.module');
+const requests = require('./requests/requests.module');
 
 // define routes
 router.use('/users', uploadFile.none(), users.controller);
-router.use('/customer_requests', uploadFile.none(), customers.controller);
+router.use('/requests', uploadFile.none(), requests.controller);
 router.use(
-  '/news',
+  '/articles',
   uploadFile.none(),
   passport.authenticate('jwt', { session: false }),
-  news.controller
+  articles.controller
 );
 router.use(
   '/products',

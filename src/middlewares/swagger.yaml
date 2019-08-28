@@ -423,6 +423,9 @@ paths:
                   username:
                     type: string
                     example: example
+                  role:
+                    type: string
+                    example: user
                   token:
                     type: string
                     example: eyJhbGciOiJIUqweADCasSVasd125cCI6IkpXVCJ9.eyJpZCI6IjVkNWZhNzY2ZjU0YTYyM2Q0NTgwN2FkYiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE1NjY4Mzc1OTksImV4cCI6MTU2NzQ0MjM5OX0.CnHt70fzNQ6oDRSA4GdhC9ewWWUpt_pXLkqcqKQzURw

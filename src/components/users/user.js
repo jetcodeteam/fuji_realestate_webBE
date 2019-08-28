@@ -17,6 +17,12 @@ const UserSchema = new mongoose.Schema(
       unique: true,
     },
     hashpwd: String,
+    role: {
+      type: String,
+      lowercase: true,
+      required: true,
+      match: /^[a-zA-Z0-9]+$/,
+    },
   },
   { timestamps: true }
 );
@@ -36,6 +42,7 @@ UserSchema.methods.generateJWT = function() {
     {
       id: this._id,
       username: this.username,
+      role: this.role,
     },
     SERCETKEY,
     {
@@ -47,6 +54,7 @@ UserSchema.methods.generateJWT = function() {
 UserSchema.methods.toAuthJSON = function() {
   return {
     username: this.username,
+    role: this.role,
     token: this.generateJWT(),
   };
 };
