@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const PostSchema = new mongoose.Schema({
+const ArticleSchema = new mongoose.Schema({
   title: String,
   content: Buffer,
   option: {
@@ -8,4 +8,4 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Post', PostSchema);
+module.exports = mongoose.model('Article', ArticleSchema);
