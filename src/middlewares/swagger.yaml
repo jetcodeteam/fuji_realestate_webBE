@@ -7,19 +7,19 @@ info:
     name: JetCode
     email: jetcode@gmail.com
 tags:
-  - name: Customer Requests
+  - name: Requests
     description: Access to customer requests
-  - name: News
-    description: Everything about News
+  - name: Articles
+    description: Everything about Articles
   - name: Products
     description: Everything about Products
   - name: Users
     description: Operations about user
 paths:
-  /api/customer_requests:
+  /api/requests:
     get:
       tags:
-        - Customer Requests
+        - Requests
       operationId: GetAllCustomerRequests
       summary: Get list of record of customer requests with pagination
       parameters:
@@ -45,7 +45,7 @@ paths:
           description: Token is missing or invalid
     post:
       tags:
-        - Customer Requests
+        - Requests
       operationId: CreateCustomerRequests
       summary: Create a new customer requests
       requestBody:
@@ -55,10 +55,10 @@ paths:
           description: Create a new customer requests
         '400':
           description: Bad request
-  '/api/customer_requests/{id}':
+  '/api/requests/{id}':
     get:
       tags:
-        - Customer Requests
+        - Requests
       operationId: GetOneCustomerRequests
       summary: Get an existing customer request
       parameters:
@@ -86,7 +86,7 @@ paths:
           description: Customer requests not found
     put:
       tags:
-        - Customer Requests
+        - Requests
       operationId: UpdateOneCustomerRequests
       summary: Update an existing customer requests
       parameters:
@@ -116,7 +116,7 @@ paths:
           description: Validation exception
     delete:
       tags:
-        - Customer Requests
+        - Requests
       operationId: DeleteOneCustomerRequests
       summary: Delete an existing customer requests
       parameters:
@@ -138,12 +138,12 @@ paths:
           description: Invalid ID supplied
         '404':
           description: customer requests not found
-  /api/news:
+  /api/articles:
     get:
       tags:
-        - News
-      operationId: GetAllNews
-      summary: Get list of record of news with pagination
+        - Articles
+      operationId: GetAllArticles
+      summary: Get list of record of articles with pagination
       parameters:
         - $ref: '#/components/parameters/offsetParam'
         - $ref: '#/components/parameters/limitParam'
@@ -154,47 +154,47 @@ paths:
         - bearerAuth: []
       responses:
         '200':
-          description: Get a list of record of news
+          description: Get a list of record of articles
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/News'
+                  $ref: '#/components/schemas/Articles'
         '400':
           description: Bad request
         '401':
           description: Token is missing or invalid
     post:
       tags:
-        - News
-      operationId: CreateNews
-      summary: Create a new news
+        - Articles
+      operationId: CreateArticles
+      summary: Create a new articles
       requestBody:
-        $ref: '#/components/requestBodies/News'
+        $ref: '#/components/requestBodies/Articles'
       security:
         - bearerAuth: []
       responses:
         '201':
-          description: Create a new news
+          description: Create a new articles
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/News'
+                $ref: '#/components/schemas/Articles'
         '400':
           description: Bad request
         '401':
           description: Token is missing or invalid
-  '/api/news/{id}':
+  '/api/articles/{id}':
     get:
       tags:
-        - News
-      operationId: GetOneNews
-      summary: Get an existing news
+        - Articles
+      operationId: GetOneArticles
+      summary: Get an existing articles
       parameters:
         - name: id
           in: path
-          description: ID of news to get
+          description: ID of articles to get
           required: true
           schema:
             type: string
@@ -203,26 +203,26 @@ paths:
         - bearerAuth: []
       responses:
         '200':
-          description: Get an exist item of news
+          description: Get an exist item of articles
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/News'
+                $ref: '#/components/schemas/Articles'
         '401':
           description: Token is missing or invalid
         '400':
           description: Invalid ID supplied
         '404':
-          description: News not found
+          description: Articles not found
     put:
       tags:
-        - News
+        - Articles
       operationId: UpdateOneNews
-      summary: Update an existing news
+      summary: Update an existing articles
       parameters:
         - name: id
           in: path
-          description: ID of news to get
+          description: ID of articles to get
           required: true
           schema:
             type: string
@@ -231,7 +231,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/News'
+              $ref: '#/components/schemas/Articles'
       security:
         - bearerAuth: []
       responses:
@@ -240,24 +240,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/News'
+                $ref: '#/components/schemas/Articles'
         '400':
           description: Invalid ID supplied
         '401':
           description: Token is missing or invalid
         '404':
-          description: News not found
+          description: Articles not found
         '405':
           description: Validation exception
     delete:
       tags:
-        - News
-      operationId: DeleteOneNews
-      summary: Delete an existing news
+        - Articles
+      operationId: DeleteOneArticles
+      summary: Delete an existing articles
       parameters:
         - name: id
           in: path
-          description: ID of news to get
+          description: ID of articles to get
           required: true
           schema:
             type: string
@@ -272,7 +272,7 @@ paths:
         '401':
           description: Token is missing or invalid
         '404':
-          description: News not found
+          description: Articles not found
         '405':
           description: Validation exception
   /api/products:
@@ -446,7 +446,7 @@ components:
         password:
           type: string
           format: password
-    News:
+    Articles:
       type: object
       required:
         - title
@@ -460,7 +460,7 @@ components:
           description: Auto generate ID
         title:
           type: string
-          example: This is a news about house
+          example: This is a articles about house
         content:
           type: string
           format: byte
@@ -565,14 +565,14 @@ components:
              * `0` - Pending
              * `1` - Handled
   requestBodies:
-    News:
+    Articles:
       content:
         multipart/form-data:
           schema:
-            $ref: '#/components/schemas/News'
+            $ref: '#/components/schemas/Articles'
         application/json:
           schema:
-            $ref: '#/components/schemas/News'
+            $ref: '#/components/schemas/Articles'
     Products:
       content:
         multipart/form-data:
