@@ -12,7 +12,7 @@ require('./passport');
 
 // apply middleware
 const apply = app => {
-  app.use(logger('dev'));
+  app.use(logger('combined'));
 
   // secure http
   app.use(
