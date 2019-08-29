@@ -8,10 +8,12 @@ const articles = require('./articles/articles.module');
 const users = require('./users/users.module');
 const products = require('./products/products.module');
 const requests = require('./requests/requests.module');
+const uploads = require('./uploads/uploads.module');
 
 // define routes
 router.use('/users', uploadFile.none(), users.controller);
 router.use('/requests', uploadFile.none(), requests.controller);
+router.use('/uploads', uploads.controller);
 router.use(
   '/articles',
   uploadFile.none(),
@@ -20,7 +22,7 @@ router.use(
 );
 router.use(
   '/products',
-  // passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwt', { session: false }),
   products.controller
 );
 

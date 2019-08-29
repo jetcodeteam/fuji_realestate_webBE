@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Fujiwara API
-  version: 1.0.0
+  version: '2.0.0'
   description: Fujiwara API Website
   contact:
     name: JetCode
@@ -15,8 +15,10 @@ tags:
     description: Everything about Products
   - name: Users
     description: Operations about user
+  - name: Uploads
+    description: Upload image to server
 paths:
-  /api/requests:
+  /requests:
     get:
       tags:
         - Requests
@@ -55,7 +57,7 @@ paths:
           description: Create a new customer requests
         '400':
           description: Bad request
-  '/api/requests/{id}':
+  '/requests/{id}':
     get:
       tags:
         - Requests
@@ -138,7 +140,7 @@ paths:
           description: Invalid ID supplied
         '404':
           description: customer requests not found
-  /api/articles:
+  /articles:
     get:
       tags:
         - Articles
@@ -185,7 +187,7 @@ paths:
           description: Bad request
         '401':
           description: Token is missing or invalid
-  '/api/articles/{id}':
+  '/articles/{id}':
     get:
       tags:
         - Articles
@@ -275,7 +277,7 @@ paths:
           description: Articles not found
         '405':
           description: Validation exception
-  /api/products:
+  /products:
     get:
       tags:
         - Products
@@ -317,8 +319,7 @@ paths:
           description: Create a new product
         '400':
           description: Bad request
-      deprecated: true
-  '/api/products/{id}':
+  '/products/{id}':
     get:
       tags:
         - Products
@@ -379,7 +380,6 @@ paths:
           description: Products not found
         '405':
           description: Validation exception
-      deprecated: true
     delete:
       tags:
         - Products
@@ -404,7 +404,7 @@ paths:
           description: Token is missing or invalid
         '404':
           description: Products not found
-  /api/users/login:
+  /users/login:
     post:
       tags:
         - Users
@@ -429,6 +429,27 @@ paths:
                   token:
                     type: string
                     example: eyJhbGciOiJIUqweADCasSVasd125cCI6IkpXVCJ9.eyJpZCI6IjVkNWZhNzY2ZjU0YTYyM2Q0NTgwN2FkYiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE1NjY4Mzc1OTksImV4cCI6MTU2NzQ0MjM5OX0.CnHt70fzNQ6oDRSA4GdhC9ewWWUpt_pXLkqcqKQzURw
+        '400':
+          description: Username or password is invalid
+  /uploads:
+    post:
+      tags:
+        - Uploads
+      operationId: UploadImage
+      summary: Upload image to server
+      requestBody:
+        $ref: '#/components/requestBodies/Uploads'
+      responses:
+        '200':
+          description: Logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  path:
+                    type: string
+                    example: http://localhost/static/name-of-your-image.png
         '400':
           description: Username or password is invalid
 components:
@@ -491,8 +512,7 @@ components:
           type: array
           items:
             type: string
-            format: binary
-          description: Use Postman instead of swagger
+          description: Url of your image
         square:
           type: number
           format: float
@@ -517,6 +537,7 @@ components:
           type: string
           enum: [0, 1]
           default: 0
+          example: 0
           description: >
             Status of products:
              * `0` - Selling
@@ -563,10 +584,20 @@ components:
           type: string
           enum: [0, 1]
           default: 0
+          example: 0
           description: >
             Status of products:
              * `0` - Pending
              * `1` - Handled
+    Uploads:
+      type: object
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          format: binary
+          example: your-image.png
   requestBodies:
     Articles:
       content:
@@ -600,6 +631,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/User'
+    Uploads:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Uploads'
   parameters:
     offsetParam:
       in: query

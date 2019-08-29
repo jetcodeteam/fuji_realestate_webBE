@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const middlewares = require('./middlewares');
 
 // root api
@@ -9,6 +10,9 @@ const apiRouter = require('./components');
 
 // init app
 const app = express();
+
+// serve static
+app.use('/static', express.static(path.join(__dirname, '../uploads')));
 
 // init middlewares
 middlewares.apply(app);
