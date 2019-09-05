@@ -3,9 +3,12 @@ const redis = require('redis');
 
 // create redis client
 const getStore = () => {
-  return process.env.REDISTOGO_URL
+  const url = process.env.REDISTOGO_URL || process.env.REDIS_URL;
+  return url
     ? new RedisStore({
-        client: redis.createClient({ url: process.env.REDISTOGO_URL }),
+        client: redis.createClient({
+          url,
+        }),
       })
     : new RedisStore();
 };

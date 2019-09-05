@@ -16,7 +16,7 @@ tags:
   - name: Users
     description: Operations about user
   - name: Uploads
-    description: Upload image to server
+    description: Store image on server
 paths:
   /requests:
     get:
@@ -441,13 +441,16 @@ paths:
         $ref: '#/components/requestBodies/Uploads'
       responses:
         '200':
-          description: Logged in successfully
+          description: Uploaded image successfully
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  path:
+                  filename:
+                    type: string
+                    example: name-of-your-image.png
+                  url:
                     type: string
                     example: http://localhost/static/name-of-your-image.png
         '400':

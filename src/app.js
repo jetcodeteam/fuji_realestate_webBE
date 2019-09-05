@@ -1,12 +1,12 @@
-/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const middlewares = require('./middlewares');
 
 // root api
-const apiRouter = require('./components');
+const apiRouter = require('./apis');
 
 // init app
 const app = express();
@@ -25,7 +25,7 @@ mongoose.connect(process.env.MONGODB_URI_JETCODE, {
 if (process.env.NODE_ENV === 'development') mongoose.set('debug', true);
 
 // register api
-app.use('/api', apiRouter);
+app.use(apiRouter);
 
 // Not found
 app.use((req, res, next) =>
@@ -33,6 +33,9 @@ app.use((req, res, next) =>
 );
 
 // Any error
-app.use((err, req, res, next) => res.status(500).send({ error: err }));
+app.use((error, req, res, next) => {
+  if (error.status) return res.status(error.status).send({ error });
+  return res.status(500).send({ error });
+});
 
 module.exports = app;

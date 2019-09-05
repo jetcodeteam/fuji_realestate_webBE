@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
-const User = require('../components/users/user');
+const User = require('../apis/users/user');
 
 const seedData = async (username, pwd, role) => {
   console.log('🎉 Seeding data...');

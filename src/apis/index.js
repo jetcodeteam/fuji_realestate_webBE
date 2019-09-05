@@ -13,7 +13,12 @@ const uploads = require('./uploads/uploads.module');
 // define routes
 router.use('/users', uploadFile.none(), users.controller);
 router.use('/requests', uploadFile.none(), requests.controller);
-router.use('/uploads', uploads.controller);
+router.use(
+  '/uploads',
+  // FIXME: unauthorized on development
+  // passport.authenticate('jwt', { session: false }),
+  uploads.controller
+);
 router.use(
   '/articles',
   uploadFile.none(),
