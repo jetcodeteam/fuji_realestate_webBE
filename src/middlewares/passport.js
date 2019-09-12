@@ -45,3 +45,24 @@ passport.use(
     }
   )
 );
+
+// authorize token of forgot password by email
+passport.use(
+  'email',
+  new JWTStrategy(
+    {
+      jwtFromRequest: ExtractJWT.fromUrlQueryParameter('code'),
+      secretOrKey: config.SERCETKEY,
+      ignoreExpiration: false,
+    },
+    async (payload, cb) => {
+      try {
+        const user = await User.findById(payload.id);
+        if (!user || !payload.isEmail) cb('User not found');
+        return cb(null, user);
+      } catch (err) {
+        return cb(err);
+      }
+    }
+  )
+);
