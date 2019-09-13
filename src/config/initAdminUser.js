@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'development') mongoose.set('debug', true);
 
 seedData(
   process.env.USERNAME_ADMIN || 'admin',
-  process.env.USERNAME_ADMIN || 'lqs9773@gmail.com',
+  process.env.EMAIL_ADMIN || 'lqs9773@gmail.com',
   process.env.PASSWORD_ADMIN || '123456789',
   process.env.ROLE_ADMIN || 'test'
 );
