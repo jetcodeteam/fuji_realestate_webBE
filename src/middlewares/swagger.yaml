@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Fujiwara API
-  version: '2.0.0'
+  version: "3.0.0"
   description: Fujiwara API Website
   contact:
     name: JetCode
@@ -431,12 +431,114 @@ paths:
                     example: eyJhbGciOiJIUqweADCasSVasd125cCI6IkpXVCJ9.eyJpZCI6IjVkNWZhNzY2ZjU0YTYyM2Q0NTgwN2FkYiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE1NjY4Mzc1OTksImV4cCI6MTU2NzQ0MjM5OX0.CnHt70fzNQ6oDRSA4GdhC9ewWWUpt_pXLkqcqKQzURw
         '400':
           description: Username or password is invalid
+  /users/forgotpassword:
+    post:
+      tags:
+        - Users
+      operationId: ForgotPassword
+      summary: Request to reset password by email
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: your-email@gmail.com
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: your-email@gmail.com
+      responses:
+        '200':
+          description: Logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Send an email reset password
+        '400':
+          description: Invalid field
+  /users/verify:
+    get:
+      tags:
+        - Users
+      operationId: VerifyEmail
+      summary: Verify reset password
+      parameters:
+        - $ref: '#/components/parameters/codeAccess'
+      responses:
+        '200':
+          description: Verified successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: example
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUqweADCasSVasd125cCI6IkpXVCJ9.eyJpZCI6IjVkNWZhNzY2ZjU0YTYyM2Q0NTgwN2FkYiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE1NjY4Mzc1OTksImV4cCI6MTU2NzQ0MjM5OX0.CnHt70fzNQ6oDRSA4GdhC9ewWWUpt_pXLkqcqKQzURw
+        '400':
+          description: Token is invalid
+        '401':
+          description: Token is missing
+  /users/resetpassword:
+    patch:
+      tags:
+        - Users
+      operationId: ResetPassword
+      summary: Validate reset password by code
+      parameters:
+        - $ref: '#/components/parameters/codeAccess'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  format: password
+                  example: your-password
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: your-password
+          
+      responses:
+        '200':
+          description: Logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Reset password successfully
+        '400':
+          description: Password is invalid  or missed
   /uploads:
     post:
       tags:
         - Uploads
       operationId: UploadImage
-      summary: Upload image to server
+      summary: Upload image to server 
       requestBody:
         $ref: '#/components/requestBodies/Uploads'
       responses:
@@ -477,6 +579,7 @@ components:
       type: object
       required:
         - title
+        - thumbnail
         - content
       properties:
         id:
@@ -488,6 +591,10 @@ components:
         title:
           type: string
           example: This is a articles about house
+        thumbnail:
+          type: string
+          format: binary
+          example: your-image.png
         content:
           type: string
           format: byte
@@ -640,6 +747,14 @@ components:
           schema:
             $ref: '#/components/schemas/Uploads'
   parameters:
+    codeAccess:
+      name: code
+      in: query
+      description: Code verify reset password
+      required: true
+      schema:
+        type: string
+        example: eyJhbGciOiJIUqweADCasSVasd125cCI6IkpXVCJ9.eyJpZCI6IjVkNWZhNzY2ZjU0YTYyM2Q0NTgwN2FkYiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE1NjY4Mzc1OTksImV4cCI6MTU2NzQ0MjM5OX0.CnHt70fzNQ6oDRSA4GdhC9ewWWUpt_pXLkqcqKQzURw
     offsetParam:
       in: query
       name: offset

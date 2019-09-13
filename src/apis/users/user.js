@@ -25,7 +25,6 @@ const UserSchema = new mongoose.Schema(
       unique: true,
     },
     hashpwd: String,
-    token: { type: String, default: '' },
     role: {
       type: String,
       lowercase: true,
