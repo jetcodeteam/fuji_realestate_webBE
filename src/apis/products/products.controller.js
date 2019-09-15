@@ -1,27 +1,22 @@
 /* eslint-disable no-console */
+import { crudControllers } from '../../utils/crud';
+
 const router = require('express').Router();
+const Products = require('./product');
+
+const controllers = crudControllers(Products);
+
 const uploadFile = require('../../middlewares/multer');
 
-router.get('', (req, res) => {
-  return res.send('Get all products');
-});
+router
+  .route('/')
+  .get(controllers.getAll)
+  .post(uploadFile.array('images', 10), controllers.createOne);
 
-router.post('', uploadFile.array('images', 10), (req, res) => {
-  console.log(req.files);
-  console.dir(req.body.images);
-  return res.status(201).send('Create a new product');
-});
-
-router.get('/:id', (req, res) => {
-  return res.send('Get one products');
-});
-
-router.put('/:id', uploadFile.array('images', 10), (req, res) => {
-  return res.send('Update a product');
-});
-
-router.delete('/:id', (req, res) => {
-  return res.send('Delete a product');
-});
+router
+  .route('/:id')
+  .get(controllers.getOne)
+  .put(uploadFile.array('images', 10), controllers.updateOne)
+  .delete(controllers.removeOne);
 
 module.exports = router;

@@ -1,23 +1,19 @@
+import { crudControllers } from '../../utils/crud';
+
 const router = require('express').Router();
+const Articles = require('./article');
 
-router.get('', (req, res) => {
-  return res.send('Get all articles');
-});
+const controllers = crudControllers(Articles);
 
-router.post('', (req, res) => {
-  return res.send('Create a new article');
-});
+router
+  .route('')
+  .get(controllers.getAll)
+  .post(controllers.createOne);
 
-router.get('/:id', (req, res) => {
-  return res.send('Get one article');
-});
-
-router.put('/:id', (req, res) => {
-  return res.send('Update a article');
-});
-
-router.delete('/:id', (req, res) => {
-  return res.send('Delete a article');
-});
+router
+  .route('/:id')
+  .get(controllers.getOne)
+  .put(controllers.updateOne)
+  .delete(controllers.removeOne);
 
 module.exports = router;
