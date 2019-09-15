@@ -1,6 +1,6 @@
-/* eslint-disable camelcase */
 const router = require('express').Router();
-const passport = require('passport');
+
+// handle upload file from request with content-type: application/form-data
 const uploadFile = require('../middlewares/multer');
 
 // routes api
@@ -11,24 +11,11 @@ const requests = require('./requests/requests.module');
 const uploads = require('./uploads/uploads.module');
 
 // define routes
+// support application/json or application/form-data
 router.use('/users', uploadFile.none(), users.controller);
 router.use('/requests', uploadFile.none(), requests.controller);
-router.use(
-  '/uploads',
-  // FIXME: unauthorized on development
-  // passport.authenticate('jwt', { session: false }),
-  uploads.controller
-);
-router.use(
-  '/articles',
-  uploadFile.none(),
-  passport.authenticate('jwt', { session: false }),
-  articles.controller
-);
-router.use(
-  '/products',
-  passport.authenticate('jwt', { session: false }),
-  products.controller
-);
+router.use('/products', uploadFile.none(), products.controller);
+router.use('/uploads', uploadFile.single('upload'), uploads.controller);
+router.use('/articles', uploadFile.none(), articles.controller);
 
 module.exports = router;
