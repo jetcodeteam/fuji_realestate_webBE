@@ -1,36 +1,24 @@
-const passport = require('passport');
+import { crudControllers } from '../../utils/crud';
+
 const router = require('express').Router();
+const passport = require('passport');
 
-router.get('', passport.authenticate('jwt', { session: false }), (req, res) => {
-  return res.send('Get all customer requests');
-});
+const Requests = require('./request');
 
-router.post('', (req, res) => {
-  return res.send('Create a new customer requests');
-});
+const controllers = crudControllers(Requests);
 
-router.get(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    return res.send('Get one customer requests');
-  }
-);
+router
+  .route('/')
+  .get(passport.authenticate('jwt', { session: false }), controllers.getAll)
+  .post(controllers.createOne);
 
-router.put(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    return res.send('Update a customer requests');
-  }
-);
-
-router.delete(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    return res.send('Delete a customer requests');
-  }
-);
+router
+  .route('/:id')
+  .get(passport.authenticate('jwt', { session: false }), controllers.getOne)
+  .put(passport.authenticate('jwt', { session: false }), controllers.updateOne)
+  .delete(
+    passport.authenticate('jwt', { session: false }),
+    controllers.removeOne
+  );
 
 module.exports = router;
