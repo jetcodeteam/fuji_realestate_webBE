@@ -5,7 +5,7 @@ const { USERNAME_EMAIL: from } = require('../../config');
 
 const sendEmailForgotPassword = (userEmail, urlVerifyPWD) => {
   User.findOne({ email: userEmail }, (err, user) => {
-    if (err) return;
+    if (err || !user) return;
     const token = user.generateCodeForgotPWD();
     const mailOptions = {
       from,

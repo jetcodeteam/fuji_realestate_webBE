@@ -36,6 +36,7 @@ passport.use(
     },
     async (payload, cb) => {
       try {
+        console.log("run jwt")
         const user = await User.findById(payload.id);
         if (!user) cb('User not found');
         return cb(null, user);
@@ -57,6 +58,7 @@ passport.use(
     },
     async (payload, cb) => {
       try {
+        console.log("run email")
         const user = await User.findById(payload.id);
         if (!user || !payload.isEmail) cb('User not found');
         return cb(null, user);
