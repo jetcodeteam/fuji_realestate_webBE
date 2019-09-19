@@ -46,20 +46,6 @@ UserSchema.methods.verifyPassword = function(pwd) {
   return bcrypt.compareSync(pwd, this.hashpwd);
 };
 
-UserSchema.methods.generateJWT = function() {
-  return jwt.sign(
-    {
-      id: this._id,
-      username: this.username,
-      role: this.role,
-    },
-    SERCETKEY,
-    {
-      expiresIn: '7d',
-    }
-  );
-};
-
 UserSchema.methods.generateCodeForgotPWD = function() {
   return jwt.sign(
     {
@@ -75,11 +61,22 @@ UserSchema.methods.generateCodeForgotPWD = function() {
   );
 };
 
-UserSchema.methods.toAuthJSON = function() {
+UserSchema.methods.toAuthJSON = function(userAgent) {
   return {
     username: this.username,
     role: this.role,
-    token: this.generateJWT(),
+    token: jwt.sign(
+      {
+        id: this._id,
+        username: this.username,
+        role: this.role,
+        agent: userAgent,
+      },
+      SERCETKEY,
+      {
+        expiresIn: '7d',
+      }
+    ),
   };
 };
 

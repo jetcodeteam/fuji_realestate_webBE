@@ -38,7 +38,7 @@ passport.use(
       try {
         const user = await User.findById(payload.id);
         if (!user) cb('User not found');
-        return cb(null, user);
+        return cb(null, user, payload);
       } catch (err) {
         return cb(err);
       }

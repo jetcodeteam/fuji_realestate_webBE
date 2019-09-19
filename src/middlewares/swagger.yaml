@@ -152,8 +152,6 @@ paths:
         - $ref: '#/components/parameters/sortParam'
         - $ref: '#/components/parameters/orderParam'
         - $ref: '#/components/parameters/filterParam'
-      security:
-        - bearerAuth: []
       responses:
         '200':
           description: Get a list of record of articles
@@ -201,8 +199,6 @@ paths:
           schema:
             type: string
             format: IdObject
-      security:
-        - bearerAuth: []
       responses:
         '200':
           description: Get an exist item of articles
@@ -289,8 +285,6 @@ paths:
         - $ref: '#/components/parameters/sortParam'
         - $ref: '#/components/parameters/orderParam'
         - $ref: '#/components/parameters/filterParam'
-      security:
-        - bearerAuth: []
       responses:
         '200':
           description: Create a new product
@@ -333,8 +327,6 @@ paths:
           schema:
             type: string
             format: IdObject
-      security:
-        - bearerAuth: []
       responses:
         '200':
           description: Get an exist item of product
@@ -541,6 +533,8 @@ paths:
       summary: Upload image to server
       requestBody:
         $ref: '#/components/requestBodies/Uploads'
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: Uploaded image successfully

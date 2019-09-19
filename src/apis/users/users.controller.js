@@ -9,7 +9,8 @@ const service = require('./user.service');
 router.post('/login', (req, res) => {
   passport.authenticate('local', { session: false }, (err, user, info) => {
     if (user) {
-      return res.status(200).json(user.toAuthJSON());
+      const userAgent = req.headers['user-agent'];
+      return res.status(200).json(user.toAuthJSON(userAgent));
     }
     return res.status(400).json({
       message: info,
