@@ -42,7 +42,6 @@ router.put(
   passport.authenticate('email', { session: false }),
   async (req, res, next) => {
     try {
-      console.log(req.user)
       const { password } = req.body;
       if (!password)
         return res
