@@ -1,11 +1,10 @@
-import { crudControllers } from '../../utils/crud';
-
 const router = require('express').Router();
 const passport = require('passport');
+const crud = require('../../utils/crud');
 
 const Requests = require('./request');
 
-const controllers = crudControllers(Requests);
+const controllers = crud.crudControllers(Requests);
 
 router
   .route('/')

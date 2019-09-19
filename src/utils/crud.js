@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-underscore-dangle */
-export const getOne = model => async (req, res) => {
+const getOne = model => async (req, res) => {
   try {
     const doc = await model
       .findOne({ _id: req.params.id })
@@ -18,7 +18,7 @@ export const getOne = model => async (req, res) => {
   }
 };
 
-export const getAll = model => async (req, res) => {
+const getAll = model => async (req, res) => {
   try {
     const docs = await model
       .find({})
@@ -32,7 +32,7 @@ export const getAll = model => async (req, res) => {
   }
 };
 
-export const createOne = model => async (req, res) => {
+const createOne = model => async (req, res) => {
   const createdBy = req.user._id;
   try {
     const doc = await model.create({ ...req.body, createdBy });
@@ -43,7 +43,7 @@ export const createOne = model => async (req, res) => {
   }
 };
 
-export const updateOne = model => async (req, res) => {
+const updateOne = model => async (req, res) => {
   try {
     const updatedDoc = await model
       .findOneAndUpdate(
@@ -68,7 +68,7 @@ export const updateOne = model => async (req, res) => {
   }
 };
 
-export const removeOne = model => async (req, res) => {
+const removeOne = model => async (req, res) => {
   try {
     const removed = await model.findOneAndRemove({
       createdBy: req.user._id,
@@ -86,10 +86,14 @@ export const removeOne = model => async (req, res) => {
   }
 };
 
-export const crudControllers = model => ({
+const crudControllers = model => ({
   removeOne: removeOne(model),
   updateOne: updateOne(model),
   getAll: getAll(model),
   getOne: getOne(model),
   createOne: createOne(model),
 });
+
+module.exports = {
+  crudControllers,
+};

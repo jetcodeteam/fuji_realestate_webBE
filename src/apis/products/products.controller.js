@@ -1,10 +1,9 @@
 /* eslint-disable no-console */
-import { crudControllers } from '../../utils/crud';
-
 const router = require('express').Router();
+const crud = require('../../utils/crud');
 const Products = require('./product');
 
-const controllers = crudControllers(Products);
+const controllers = crud.crudControllers(Products);
 
 const uploadFile = require('../../middlewares/multer');
 
