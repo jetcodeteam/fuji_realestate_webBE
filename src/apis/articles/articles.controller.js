@@ -1,40 +1,25 @@
 const passport = require('passport');
 const router = require('express').Router();
+const crud = require('../../utils/crud');
+const Articles = require('./article');
 
-router.get('', (req, res) => {
-  return res.send('Get all articles');
-});
+const controllers = crud.crudControllers(Articles);
 
-router.post(
-  '',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    return res.send('Create a new article');
-  }
-);
+router
+  .route('')
+  .post(
+    passport.authenticate('jwt', { session: false }),
+    controllers.createOne
+  );
 
-router.get(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    return res.send('Get one article');
-  }
-);
+router
+  .route('/:id')
+  .get(controllers.getOne)
+  .put(passport.authenticate('jwt', { session: false }), controllers.updateOne)
+  .delete(
+    passport.authenticate('jwt', { session: false }),
+    controllers.removeOne
+  );
 
-router.put(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    return res.send('Update a article');
-  }
-);
-
-router.delete(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    return res.send('Delete a article');
-  }
-);
-
+router.route('/:page').get(controllers.getPage);
 module.exports = router;

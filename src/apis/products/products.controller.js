@@ -1,37 +1,27 @@
 /* eslint-disable no-console */
-const router = require('express').Router();
 const passport = require('passport');
+const router = require('express').Router();
+const crud = require('../../utils/crud');
+const Products = require('./product');
 
-router.get('', passport.authenticate('jwt', { session: false }), (req, res) => {
-  return res.send('Get all products');
-});
+const controllers = crud.crudControllers(Products);
 
-router.post(
-  '',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    return res.status(201).send('Create a new product');
-  }
-);
+router
+  .route('/')
+  .post(
+    passport.authenticate('jwt', { session: false }),
+    controllers.createOne
+  );
 
-router.get('/:id', (req, res) => {
-  return res.send('Get one products');
-});
+router
+  .route('/:id')
+  .get(controllers.getOne)
+  .put(passport.authenticate('jwt', { session: false }), controllers.updateOne)
+  .delete(
+    passport.authenticate('jwt', { session: false }),
+    controllers.removeOne
+  );
 
-router.put(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    return res.send('Update a product');
-  }
-);
-
-router.delete(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    return res.send('Delete a product');
-  }
-);
+router.route('/:page').get(controllers.getPage);
 
 module.exports = router;
