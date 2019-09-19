@@ -4,10 +4,7 @@ const Articles = require('./article');
 
 const controllers = crud.crudControllers(Articles);
 
-router
-  .route('')
-  .get(controllers.getAll)
-  .post(controllers.createOne);
+router.route('').post(controllers.createOne);
 
 router
   .route('/:id')
@@ -15,4 +12,5 @@ router
   .put(controllers.updateOne)
   .delete(controllers.removeOne);
 
+router.route('/:page').get(controllers.getPage);
 module.exports = router;

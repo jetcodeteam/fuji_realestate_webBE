@@ -18,10 +18,14 @@ const getOne = model => async (req, res) => {
   }
 };
 
-const getAll = model => async (req, res) => {
+const getPage = model => async (req, res) => {
+  const resPerPage = req.query.limit || 6;
+  const page = req.params.page || 1;
   try {
     const docs = await model
       .find({})
+      .skip(resPerPage * page - resPerPage)
+      .limit(resPerPage)
       .lean()
       .exec();
 
@@ -89,7 +93,7 @@ const removeOne = model => async (req, res) => {
 const crudControllers = model => ({
   removeOne: removeOne(model),
   updateOne: updateOne(model),
-  getAll: getAll(model),
+  getPage: getPage(model),
   getOne: getOne(model),
   createOne: createOne(model),
 });

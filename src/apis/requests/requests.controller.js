@@ -6,10 +6,7 @@ const Requests = require('./request');
 
 const controllers = crud.crudControllers(Requests);
 
-router
-  .route('/')
-  .get(passport.authenticate('jwt', { session: false }), controllers.getAll)
-  .post(controllers.createOne);
+router.route('/').post(controllers.createOne);
 
 router
   .route('/:id')
@@ -19,5 +16,9 @@ router
     passport.authenticate('jwt', { session: false }),
     controllers.removeOne
   );
+
+router
+  .route('/:page')
+  .get(passport.authenticate('jwt', { session: false }), controllers.getPage);
 
 module.exports = router;
