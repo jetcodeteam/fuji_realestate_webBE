@@ -22,7 +22,7 @@ router.use(
 router.use(
   '/articles',
   uploadFile.none(),
-  passport.authenticate('jwt', { session: false }),
+  // passport.authenticate('jwt', { session: false }),
   articles.controller
 );
 router.use(

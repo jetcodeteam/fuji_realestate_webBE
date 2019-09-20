@@ -37,9 +37,8 @@ const getPage = model => async (req, res) => {
 };
 
 const createOne = model => async (req, res) => {
-  const createdBy = req.user._id;
   try {
-    const doc = await model.create({ ...req.body, createdBy });
+    const doc = await model.create({ ...req.body });
     res.status(201).json({ data: doc });
   } catch (e) {
     // console.error(e);
@@ -52,7 +51,6 @@ const updateOne = model => async (req, res) => {
     const updatedDoc = await model
       .findOneAndUpdate(
         {
-          createdBy: req.user._id,
           _id: req.params.id,
         },
         req.body,
@@ -75,7 +73,6 @@ const updateOne = model => async (req, res) => {
 const removeOne = model => async (req, res) => {
   try {
     const removed = await model.findOneAndRemove({
-      createdBy: req.user._id,
       _id: req.params.id,
     });
 

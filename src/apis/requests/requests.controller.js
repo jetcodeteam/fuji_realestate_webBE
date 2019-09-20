@@ -18,7 +18,7 @@ router
   );
 
 router
-  .route('/:page')
+  .route('/pages/:page')
   .get(passport.authenticate('jwt', { session: false }), controllers.getPage);
 
 module.exports = router;
