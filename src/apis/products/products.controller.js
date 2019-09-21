@@ -30,6 +30,6 @@ router
     controllers.removeOne
   );
 
-router.route('/:page').get(controllers.getPage);
+router.route('/pages/:page').get(controllers.getPage);
 
 module.exports = router;
