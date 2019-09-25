@@ -13,26 +13,24 @@ const getOne = model => async (req, res) => {
 
     res.status(200).json({ data: doc });
   } catch (e) {
-    // console.error(e);
     res.status(400).end();
   }
 };
 
 const getPage = model => async (req, res) => {
-  const resPerPage = req.query.limit || 6;
-  const page = req.params.page || 1;
+  const limit = req.query.limit || 6;
+  const offset = req.query.offset || 0;
   try {
     const docs = await model
       .find({})
-      .skip(resPerPage * page - resPerPage)
-      .limit(resPerPage)
+      .limit(Number(limit))
+      .skip(Number(offset))
       .lean()
       .exec();
 
     res.status(200).json({ data: docs });
   } catch (e) {
-    // console.error(e);
-    res.status(400).end();
+    res.status(400).send('Bad request');
   }
 };
 
@@ -41,8 +39,7 @@ const createOne = model => async (req, res) => {
     const doc = await model.create({ ...req.body });
     res.status(201).json({ data: doc });
   } catch (e) {
-    // console.error(e);
-    res.status(400).end();
+    res.status(400).send('Bad request');
   }
 };
 
@@ -60,13 +57,12 @@ const updateOne = model => async (req, res) => {
       .exec();
 
     if (!updatedDoc) {
-      return res.status(400).end();
+      return res.status(400).send('Invalid ID supplied');
     }
 
     res.status(200).json({ data: updatedDoc });
   } catch (e) {
-    // console.error(e);
-    res.status(400).end();
+    res.status(400).send('Request not found');
   }
 };
 
@@ -82,8 +78,7 @@ const removeOne = model => async (req, res) => {
 
     return res.status(200).json({ data: removed });
   } catch (e) {
-    // console.error(e);
-    res.status(400).end();
+    res.status(400).send('Invalid ID supplied');
   }
 };
 
