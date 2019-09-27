@@ -1,5 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-underscore-dangle */
 const getOne = model => async (req, res) => {
   try {
     const doc = await model
@@ -11,9 +9,9 @@ const getOne = model => async (req, res) => {
       return res.status(400).end();
     }
 
-    res.status(200).json({ data: doc });
+    return res.status(200).json({ data: doc });
   } catch (e) {
-    res.status(400).end();
+    return res.status(400).end();
   }
 };
 
@@ -30,7 +28,7 @@ const getPage = model => async (req, res) => {
 
     res.status(200).json({ data: docs });
   } catch (e) {
-    res.status(400).send('Bad request');
+    res.status(400).json({ message: 'Bad request' });
   }
 };
 
@@ -39,7 +37,7 @@ const createOne = model => async (req, res) => {
     const doc = await model.create({ ...req.body });
     res.status(201).json({ data: doc });
   } catch (e) {
-    res.status(400).send('Bad request');
+    res.status(400).json({ message: 'Bad request' });
   }
 };
 
@@ -57,12 +55,12 @@ const updateOne = model => async (req, res) => {
       .exec();
 
     if (!updatedDoc) {
-      return res.status(400).send('Invalid ID supplied');
+      return res.status(400).json({ message: 'Invalid ID supplied' });
     }
 
-    res.status(200).json({ data: updatedDoc });
+    return res.status(200).json({ data: updatedDoc });
   } catch (e) {
-    res.status(400).send('Request not found');
+    return res.status(400).json({ message: 'Request not found' });
   }
 };
 
@@ -78,7 +76,7 @@ const removeOne = model => async (req, res) => {
 
     return res.status(200).json({ data: removed });
   } catch (e) {
-    res.status(400).send('Invalid ID supplied');
+    return res.status(400).json({ message: 'Invalid ID supplied' });
   }
 };
 

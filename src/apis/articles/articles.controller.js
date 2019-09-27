@@ -6,11 +6,18 @@ const authorizeAgent = require('../../middlewares/authorizeAgent');
 
 const controllers = crud.crudControllers(Articles);
 
-router.route('').post(
-  // passport.authenticate('jwt', { session: false }),
-  // authorizeAgent,
-  controllers.createOne
-);
+router
+  .route('')
+  .get(
+    passport.authenticate('jwt', { session: false }),
+    authorizeAgent,
+    controllers.getPage
+  )
+  .post(
+    passport.authenticate('jwt', { session: false }),
+    authorizeAgent,
+    controllers.createOne
+  );
 
 router
   .route('/:id')
@@ -26,5 +33,4 @@ router
     controllers.removeOne
   );
 
-router.route('/pages/:page').get(controllers.getPage);
 module.exports = router;
