@@ -18,14 +18,20 @@ const getOne = model => async (req, res) => {
 const getPage = model => async (req, res) => {
   const limit = req.query.limit || 6;
   const offset = req.query.offset || 0;
+  const sort = req.query.sort || 'createAt';
+  const order = req.query.order || 'DESC';
+  const filter = req.query.filter ? JSON.parse(req.query.filter) : {};
   try {
+    const total = await model.count();
     const docs = await model
-      .find({})
+      .find(filter)
+      .sort({ [sort]: order })
       .limit(Number(limit))
       .skip(Number(offset))
       .lean()
       .exec();
-
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Range');
+    res.setHeader('Content-Range', `${offset}-${limit}/${total}`);
     res.status(200).json({ data: docs });
   } catch (e) {
     res.status(400).json({ message: 'Bad request' });
