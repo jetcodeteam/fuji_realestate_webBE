@@ -783,8 +783,8 @@ components:
       schema:
         type: string
         description: Sort order
-        enum: [ASC, DESC]
-        default: ASC
+        enum: [asc, desc]
+        default: asc
       description: Sort order.
     filterParam:
       in: query
