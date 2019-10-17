@@ -6,9 +6,8 @@ const getOne = model => async (req, res) => {
       .exec();
 
     if (!doc) {
-      return res.status(400).end();
+      return res.status(400).json({ message: 'Invalid ID supplied' });
     }
-
     return res.status(200).json({ data: doc });
   } catch (e) {
     return res.status(400).end();
@@ -18,10 +17,11 @@ const getOne = model => async (req, res) => {
 const getPage = model => async (req, res) => {
   const limit = req.query.limit || 6;
   const offset = req.query.offset || 0;
-  const sort = req.query.sort || 'createAt';
-  const order = req.query.order || 'DESC';
+  const sort = req.query.sort || 'createdAt';
   const filter = req.query.filter ? JSON.parse(req.query.filter) : {};
+  let order = req.query.order || 'DESC';
   try {
+    order = order.toLowerCase();
     const total = await model.count();
     const docs = await model
       .find(filter)
