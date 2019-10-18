@@ -7,6 +7,6 @@ service redis-server status
 '''
 # Add location data to database when run server
 '''
-mongoimport --uri="mongodb://localhost:27017/test" --mode=upsert --collection=districts --file=./uploads/locationData/districts.json
-mongoimport --uri="mongodb://localhost:27017/test" --mode=upsert --collection=wards --file=./uploads/locationData/ward_lists.json  --jsonArray
+mongoimport --uri="mongodb://localhost:27017/test" --mode=upsert --collection=districts --file=./static/uploads/locationData/districts.json
+mongoimport --uri="mongodb://localhost:27017/test" --mode=upsert --collection=wards --file=./static/uploads/locationData/ward_lists.json  --jsonArray
 '''
