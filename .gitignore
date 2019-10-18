@@ -92,4 +92,7 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+# VSCode config
+.vsode/
+
 # End of https://www.gitignore.io/api/node
