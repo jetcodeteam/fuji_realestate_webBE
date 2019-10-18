@@ -1,2 +1,13 @@
 {
+    "sqltools.connections": [
+        {
+            "database": "qcoop",
+            "dialect": "PostgreSQL",
+            "name": "Qcoop",
+            "password": "123456",
+            "port": 5432,
+            "server": "localhost",
+            "username": "postgres"
+        }
+    ]
 }

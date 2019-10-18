@@ -7,16 +7,19 @@ info:
     name: JetCode
     email: jetcode@gmail.com
 tags:
+  - name: Users
+    description: Operations about user
+  - name: Uploads
+    description: Store image on server
+  - name: Location
+    description: Get district or wards of district
   - name: Requests
     description: Access to customer requests
   - name: Articles
     description: Everything about Articles
   - name: Products
     description: Everything about Products
-  - name: Users
-    description: Operations about user
-  - name: Uploads
-    description: Store image on server
+  
 paths:
   /requests:
     get:
@@ -551,6 +554,36 @@ paths:
                     example: http://localhost/static/name-of-your-image.png
         '400':
           description: Username or password is invalid
+  /districts:
+    get:
+      tags:
+        - Location
+      operationId: GetDistrict
+      summary: Get list of dictrict
+      parameters:
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/sortParam'
+        - $ref: '#/components/parameters/orderParam'
+        - $ref: '#/components/parameters/filterParam'
+      responses:
+        '200':
+          description: Get list districts
+  /wards:
+    get:
+      tags:
+        - Location
+      operationId: GetWardDistrict
+      summary: Get list ward of district
+      parameters:
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/sortParam'
+        - $ref: '#/components/parameters/orderParam'
+        - $ref: '#/components/parameters/filterParam'
+      responses:
+        '200':
+          description: Get list of ward districts
 components:
   securitySchemes:
     bearerAuth:
