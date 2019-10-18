@@ -569,21 +569,23 @@ paths:
       responses:
         '200':
           description: Get list districts
-  /wards:
+  /wards/{id}:
     get:
       tags:
         - Location
       operationId: GetWardDistrict
-      summary: Get list ward of district
+      summary: Get list wards of district
       parameters:
-        - $ref: '#/components/parameters/offsetParam'
-        - $ref: '#/components/parameters/limitParam'
-        - $ref: '#/components/parameters/sortParam'
-        - $ref: '#/components/parameters/orderParam'
-        - $ref: '#/components/parameters/filterParam'
+        - name: id
+          in: path
+          description: ID of district to get wards
+          required: true
+          schema:
+            type: string
+            format: IdObject
       responses:
         '200':
-          description: Get list of ward districts
+          description: Get list of wards
 components:
   securitySchemes:
     bearerAuth:
