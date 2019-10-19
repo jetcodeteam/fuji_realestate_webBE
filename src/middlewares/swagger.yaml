@@ -635,6 +635,8 @@ components:
         - floor
         - district
         - city
+        - ward
+        - price
         - status
       properties:
         id:
@@ -657,9 +659,13 @@ components:
           example: 100
         floor:
           type: number
-          format: float
-          example: 2.5
-        street:
+          format: integer
+          example: 2
+        price:
+          type: number
+          format: integer
+          example: 1000000
+        address:
           type: string
           example: Nguyen Thi Minh Khai
         ward:
