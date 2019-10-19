@@ -16,12 +16,7 @@ router
     authorizeAgent,
     controllers.getPage
   )
-  .post(
-    passport.authenticate('jwt', { session: false }),
-    authorizeAgent,
-    objectIdValidator(Products),
-    controllers.createOne
-  );
+  .post(objectIdValidator(Products), controllers.createOne);
 
 router
   .route('/:id')
