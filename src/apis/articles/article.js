@@ -4,7 +4,7 @@ const ArticleSchema = new mongoose.Schema(
   {
     title: String,
     content: String,
-    thumbnail: Buffer,
+    thumbnail: String,
   },
   {
     timestamps: true,
