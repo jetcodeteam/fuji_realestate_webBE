@@ -653,6 +653,9 @@ components:
           items:
             type: string
           description: Url of your image
+        houseType:
+          type: string
+          example: Department
         square:
           type: number
           format: float
