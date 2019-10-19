@@ -8,11 +8,7 @@ const controllers = crud.crudControllers(Articles);
 
 router
   .route('')
-  .get(
-    passport.authenticate('jwt', { session: false }),
-    authorizeAgent,
-    controllers.getPage
-  )
+  .get(controllers.getPage)
   .post(
     passport.authenticate('jwt', { session: false }),
     authorizeAgent,
