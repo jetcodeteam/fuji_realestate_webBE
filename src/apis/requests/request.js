@@ -6,10 +6,7 @@ const RequestSchema = new mongoose.Schema(
   {
     topic: { type: String, required: true },
     content: { type: String, required: true },
-    phone: {
-      type: String,
-      match: [/^\+[0-9]?()[0-9](\s|\S)(\d[0-9]{9})$/gm, 'Invalid phone number'],
-    },
+    phone: String,
     email: {
       type: String,
       match: [
