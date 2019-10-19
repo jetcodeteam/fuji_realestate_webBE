@@ -718,8 +718,7 @@ components:
           example: ''
           description: Product be mentioned
         phone:
-          type: number
-          format: int
+          type: string
           example: 0123456789
           description: Contact of customer
         email:
