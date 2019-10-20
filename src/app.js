@@ -21,6 +21,7 @@ middlewares.apply(app);
 mongoose.connect(process.env.MONGODB_URI_JETCODE, {
   useNewUrlParser: true,
   autoIndex: false,
+  useUnifiedTopology: true,
 });
 if (process.env.NODE_ENV === 'development') mongoose.set('debug', true);
 

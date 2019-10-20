@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 
 const DistrictSchema = new mongoose.Schema(
   {
-    _id: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     name: String,
     type: String,
     slug: String,
