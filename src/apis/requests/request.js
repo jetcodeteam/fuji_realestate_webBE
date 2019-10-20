@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
-
 const RequestSchema = new mongoose.Schema(
   {
     topic: { type: String, required: true },
