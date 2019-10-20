@@ -23,7 +23,6 @@ const RequestSchema = new mongoose.Schema(
         message: '{VALUE} is not an integer value',
       },
     },
-    product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
   },
   {
     timestamps: true,
