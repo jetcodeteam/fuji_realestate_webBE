@@ -800,7 +800,8 @@ components:
       name: offset
       required: true
       schema:
-        type: integer
+        type: number
+        format: integer
         minimum: 0
         default: 0
       description: The number of items to skip before starting to collect the result set.
@@ -809,7 +810,8 @@ components:
       name: limit
       required: true
       schema:
-        type: integer
+        type: number
+        format: integer
         minimum: 1
         maximum: 50
         default: 10
@@ -837,6 +839,6 @@ components:
       name: filter
       required: true
       schema:
-        type: object
+        type: string
         default: {}
       description: Filter by field format by JSON stringify of Object JS.
