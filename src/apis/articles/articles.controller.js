@@ -17,11 +17,7 @@ router
 
 router
   .route('/:id')
-  .get(
-    passport.authenticate('jwt', { session: false }),
-    authorizeAgent,
-    controllers.getOne
-  )
+  .get(controllers.getOne)
   .put(
     passport.authenticate('jwt', { session: false }),
     authorizeAgent,
