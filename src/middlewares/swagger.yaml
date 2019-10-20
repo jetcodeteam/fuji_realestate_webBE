@@ -653,6 +653,10 @@ components:
           items:
             type: string
           description: Url of your image
+        feature:
+          type: array
+          items:
+            type: string
         houseType:
           type: string
           example: Department
