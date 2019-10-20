@@ -617,6 +617,9 @@ components:
           example: 5d5fa766f54a623d45807adb
           readOnly: true
           description: Auto generate ID
+        description:
+          type: string
+          example: your-description
         title:
           type: string
           example: This is a articles about house
