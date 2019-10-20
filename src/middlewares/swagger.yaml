@@ -719,11 +719,6 @@ components:
           type: string
           example: This is content of customer requests
           description: Detail of topic
-        product:
-          type: string
-          format: IdObject
-          example: ''
-          description: Product be mentioned
         phone:
           type: string
           example: 0123456789
