@@ -34,7 +34,7 @@ const getPage = model => async (req, res) => {
     res.setHeader('Content-Range', `${offset}-${limit}/${total}`);
     res.status(200).json({ data: docs });
   } catch (e) {
-    res.status(400).json({ message: 'Bad request' });
+    res.status(400).json({ message: e });
   }
 };
 
