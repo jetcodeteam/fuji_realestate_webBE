@@ -679,11 +679,11 @@ components:
           type: string
           example: Nguyen Thi Minh Khai
         ward:
-          type: string
-          example: Pham Ngu Lao
+          type: object
+          example: {id: "26920", name: "25"}
         district:
-          type: string
-          example: District 1
+          type: object
+          example: {id: "760", name: "01"}
         city:
           type: string
           example: HCM City
@@ -815,7 +815,7 @@ components:
       required: true
       schema:
         type: string
-        default: 'created_at'
+        default: 'createdAt'
       description: Sort items return by.
     orderParam:
       in: query

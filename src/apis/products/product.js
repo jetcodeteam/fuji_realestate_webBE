@@ -16,8 +16,8 @@ const ProductSchema = new mongoose.Schema(
     houseType: String,
     price: Number,
     address: String,
-    ward: String,
-    district: String,
+    ward: Object,
+    district: Object,
     city: String,
     status: {
       type: Number,
