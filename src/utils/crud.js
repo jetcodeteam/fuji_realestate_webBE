@@ -15,7 +15,7 @@ const getOne = model => async (req, res) => {
 };
 
 const getPage = model => async (req, res) => {
-  const limit = req.query.limit || 6;
+  const limit = req.query.limit || 10;
   const offset = req.query.offset || 0;
   const sort = req.query.sort || 'createdAt';
   const filter = req.query.filter ? JSON.parse(req.query.filter) : {};
@@ -41,9 +41,9 @@ const getPage = model => async (req, res) => {
 const createOne = model => async (req, res) => {
   try {
     const doc = await model.create({ ...req.body });
-    res.status(201).json({ data: doc });
+    return res.status(201).json({ data: doc });
   } catch (e) {
-    res.status(400).json({ message: e });
+    return res.status(400).json({ message: e });
   }
 };
 
