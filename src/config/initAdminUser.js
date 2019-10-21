@@ -5,7 +5,7 @@ const User = require('../apis/users/user');
 const seedData = async (username, email, pwd, role) => {
   console.log('🎉 Seeding data...');
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username }).lean();
     if (!user) {
       const admin = new User({
         username,

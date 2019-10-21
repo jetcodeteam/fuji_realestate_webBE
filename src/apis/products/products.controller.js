@@ -5,6 +5,7 @@ const router = require('express').Router();
 const crud = require('../../utils/crud');
 const Products = require('./product');
 const authorizeAgent = require('../../middlewares/authorizeAgent');
+const services = require('./products.service');
 
 const controllers = crud.crudControllers(Products);
 
@@ -14,7 +15,7 @@ router
   .post(
     passport.authenticate('jwt', { session: false }),
     authorizeAgent,
-    controllers.createOne
+    services.createOne
   );
 
 router
