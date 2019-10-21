@@ -13,6 +13,12 @@ const DistrictSchema = new mongoose.Schema(
       unique: true,
       dropDups: true,
     },
+    ward: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Wards',
+      },
+    ],
     parent_code: Number,
   },
   {
