@@ -3,9 +3,7 @@ const passport = require('passport');
 
 const crud = require('../../utils/crud');
 const authorizeAgent = require('../../middlewares/authorizeAgent');
-const objectIdValidator = require('../../middlewares/objectIdValidator');
 const Requests = require('./request');
-const Products = require('../products/product');
 
 const controllers = crud.crudControllers(Requests);
 
@@ -16,7 +14,7 @@ router
     authorizeAgent,
     controllers.getPage
   )
-  .post(objectIdValidator(Products), controllers.createOne);
+  .post(controllers.createOne);
 
 router
   .route('/:id')
