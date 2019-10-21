@@ -10,7 +10,7 @@ const getOne = model => async (req, res) => {
     }
     return res.status(200).json({ data: doc });
   } catch (e) {
-    return res.status(400).end();
+    return res.status(400).json({ message: e });
   }
 };
 
