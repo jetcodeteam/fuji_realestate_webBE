@@ -9,7 +9,7 @@ const WardSchema = new mongoose.Schema(
     path: String,
     path_with_type: String,
     code: { type: Number, unique: true, dropDups: true },
-    ward: {
+    district: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Districts',
     },
