@@ -1,10 +1,11 @@
-const getOne = model => async (req, res) => {
+const getOne = (model, populate) => async (req, res) => {
   try {
-    const doc = await model
-      .findOne({ _id: req.params.id })
-      .lean()
-      .exec();
+    let doc = model.findOne({ _id: req.params.id });
 
+    if (populate) {
+      doc.populate(populate);
+    }
+    doc = await doc.lean().exec();
     if (!doc) {
       return res.status(400).json({ message: 'Invalid ID supplied' });
     }
@@ -14,7 +15,7 @@ const getOne = model => async (req, res) => {
   }
 };
 
-const getPage = model => async (req, res) => {
+const getPage = (model, populate) => async (req, res) => {
   const limit = req.query.limit || 10;
   const offset = req.query.offset || 0;
   const sort = req.query.sort || 'createdAt';
@@ -23,13 +24,15 @@ const getPage = model => async (req, res) => {
   try {
     order = order.toLowerCase();
     const total = await model.count();
-    const docs = await model
+    let docs = model
       .find(filter)
       .sort({ [sort]: order })
       .limit(Number(limit))
-      .skip(Number(offset))
-      .lean()
-      .exec();
+      .skip(Number(offset));
+    if (populate) {
+      docs.populate(populate);
+    }
+    docs = await docs.lean().exec();
     res.setHeader('Access-Control-Expose-Headers', 'Content-Range');
     res.setHeader('Content-Range', `${offset}-${limit}/${total}`);
     res.status(200).json({ data: docs });
@@ -86,11 +89,11 @@ const removeOne = model => async (req, res) => {
   }
 };
 
-const crudControllers = model => ({
+const crudControllers = (model, populate) => ({
   removeOne: removeOne(model),
   updateOne: updateOne(model),
-  getPage: getPage(model),
-  getOne: getOne(model),
+  getPage: getPage(model, populate),
+  getOne: getOne(model, populate),
   createOne: createOne(model),
 });
 

@@ -10,57 +10,61 @@ mongoose.connect(process.env.MONGODB_URI_JETCODE, {
 });
 if (process.env.NODE_ENV === 'development') mongoose.set('debug', true);
 
-function generateWard(district) {
-  const wardRawData = fs.readFileSync(`${district.code}.json`);
-  const districtId = district._id;
-  const wardData = JSON.parse(wardRawData);
-  const wardList = Object.keys(wardData);
-  wardList.forEach(wardKey => {
-    console.log(wardKey);
-    const wardInfo = wardData[wardKey];
+const createDistrict = districtInfo => {
+  return new Promise(resolve => {
+    const district = new District({
+      _id: mongoose.Types.ObjectId(),
+      ...districtInfo,
+    });
+    district.save(err => {
+      if (err) console.log(err);
+      resolve(district);
+    });
+  });
+};
+
+const createWard = district => {
+  const rawWards = fs.readFileSync(`${district.code}.json`);
+  const wards = JSON.parse(rawWards);
+  const wardIds = Object.keys(wards);
+  (function next(index) {
+    if (index === wardIds.length) {
+      // No items left
+      return;
+    }
+    const wardId = wardIds[index];
+    const wardInfo = wards[wardId];
     const ward = new Ward({
       _id: mongoose.Types.ObjectId(),
       ...wardInfo,
-      district: districtId,
+      district: district._id,
     });
     ward.save(err => {
-      if (err) {
-        console.log(err);
-      }
+      if (err) console.log(err);
       district.ward.push(ward);
-      district.save(otherErr => {
-        if (err) {
-          console.log(otherErr);
-        }
+      district.save(err1 => {
+        if (err1) console.log(err1);
+        next(index + 1);
       });
     });
-  });
-}
+  })(0);
+};
 
-// const rawdata = fs.readFileSync('districts.json');
-// const districts = JSON.parse(rawdata);
-// const len = districts.length;
-// let i = 0;
-// districts.forEach(async distInfo => {
-//   const district = new District({
-//     _id: new mongoose.Types.ObjectId(),
-//     ...distInfo,
-//   });
-//   await district.save(async err => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     await generateWard(district);
-//     i += 1;
-//     if (i === len - 1) {
-//       mongoose.disconnect();
-//     }
-//   });
-// });
+// Main
+const rawDistricts = fs.readFileSync('districts.json');
+const districts = JSON.parse(rawDistricts);
 
-District.find({ code: 760 })
-  .populate('ward')
-  .exec((err, ward) => {
-    if (err) console.log(err);
-    console.log(ward);
+(function next(index) {
+  if (index === districts.length) {
+    // No items left
+    setTimeout(() => {
+      mongoose.disconnect();
+    }, 2000);
+    return;
+  }
+  const districtInfo = districts[index];
+  createDistrict(districtInfo).then(district => {
+    createWard(district);
+    next(index + 1);
   });
+})(0);
