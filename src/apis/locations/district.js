@@ -9,7 +9,7 @@ const DistrictSchema = new mongoose.Schema(
     path: String,
     path_with_type: String,
     code: {
-      type: Number,
+      type: String,
       unique: true,
       dropDups: true,
     },
