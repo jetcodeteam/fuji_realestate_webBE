@@ -7,7 +7,7 @@ const Products = require('./product');
 const authorizeAgent = require('../../middlewares/authorizeAgent');
 const services = require('./products.service');
 
-const controllers = crud.crudControllers(Products);
+const controllers = crud.crudControllers(Products, ['ward', 'district']);
 
 router
   .route('')

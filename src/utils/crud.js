@@ -3,7 +3,7 @@ const getOne = (model, populate) => async (req, res) => {
     let doc = model.findOne({ _id: req.params.id });
 
     if (populate) {
-      doc.populate(populate);
+      populate.forEach(item => doc.populate(item));
     }
     doc = await doc.lean().exec();
     if (!doc) {
@@ -30,7 +30,7 @@ const getPage = (model, populate) => async (req, res) => {
       .limit(Number(limit))
       .skip(Number(offset));
     if (populate) {
-      docs.populate(populate);
+      populate.forEach(item => docs.populate(item));
     }
     docs = await docs.lean().exec();
     res.setHeader('Access-Control-Expose-Headers', 'Content-Range');
