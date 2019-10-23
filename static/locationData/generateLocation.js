@@ -58,15 +58,15 @@ const districts = JSON.parse(rawDistricts);
 
 const generateDistricWard = () => {
   District.countDocuments().then(total => {
+    console.log('🎉 Generating districts & wards ...');
     if (total === 0) {
-      console.log('Generating districts & wards ...');
       (function next(index) {
         if (index === districts.length) {
           // No items left
           setTimeout(() => {
             mongoose.disconnect();
           }, 2000);
-          console.log('Completed task');
+          console.log('🎉 Completed task');
           process.exit(0);
           return;
         }
@@ -77,7 +77,7 @@ const generateDistricWard = () => {
         });
       })(0);
     } else {
-      console.log('District & ward are already exists');
+      console.log('🎉 Districts & wards are already exists');
       process.exit(0);
     }
   });
