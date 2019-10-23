@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
 const fs = require('fs');
 const mongoose = require('mongoose');
 const District = require('../../src/apis/locations/district');
@@ -24,7 +26,7 @@ const createDistrict = districtInfo => {
 };
 
 const createWard = district => {
-  const rawWards = fs.readFileSync(`${district.code}.json`);
+  const rawWards = fs.readFileSync(`${__dirname}/${district.code}.json`);
   const wards = JSON.parse(rawWards);
   const wardIds = Object.keys(wards);
   (function next(index) {
@@ -51,20 +53,34 @@ const createWard = district => {
 };
 
 // Main
-const rawDistricts = fs.readFileSync('districts.json');
+const rawDistricts = fs.readFileSync(`${__dirname}/districts.json`);
 const districts = JSON.parse(rawDistricts);
 
-(function next(index) {
-  if (index === districts.length) {
-    // No items left
-    setTimeout(() => {
-      mongoose.disconnect();
-    }, 2000);
-    return;
-  }
-  const districtInfo = districts[index];
-  createDistrict(districtInfo).then(district => {
-    createWard(district);
-    next(index + 1);
+const generateDistricWard = () => {
+  District.countDocuments().then(total => {
+    if (total === 0) {
+      console.log('Generating districts & wards ...');
+      (function next(index) {
+        if (index === districts.length) {
+          // No items left
+          setTimeout(() => {
+            mongoose.disconnect();
+          }, 2000);
+          console.log('Completed task');
+          process.exit(0);
+          return;
+        }
+        const districtInfo = districts[index];
+        createDistrict(districtInfo).then(district => {
+          createWard(district);
+          next(index + 1);
+        });
+      })(0);
+    } else {
+      console.log('District & ward are already exists');
+      process.exit(0);
+    }
   });
-})(0);
+};
+
+generateDistricWard();
