@@ -635,6 +635,7 @@ components:
         - name
         - images
         - square
+        - room
         - floor
         - district
         - city
@@ -663,13 +664,16 @@ components:
         houseType:
           type: string
           example: Department
+        room:
+          type: number
+          format: integer
+          example: 2
         square:
           type: number
           format: float
           example: 100
         floor:
           type: number
-          format: integer
           example: 2
         price:
           type: number

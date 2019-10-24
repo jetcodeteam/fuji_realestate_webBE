@@ -12,6 +12,7 @@ const ProductSchema = new mongoose.Schema(
         message: '{VALUE} is not an integer value',
       },
     },
+    room: Number,
     feature: [String],
     houseType: String,
     price: Number,
