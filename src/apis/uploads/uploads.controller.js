@@ -9,7 +9,7 @@ router.post(
   authorizeAgent,
   (req, res) => {
     res.send({
-      filename: `${req.file.filename}`,
+      filename: `${req.file.originalname}`,
       url: `${req.protocol}://${req.headers.host}/static/${req.file.filename}`,
     });
   }

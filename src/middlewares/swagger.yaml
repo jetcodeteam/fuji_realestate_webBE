@@ -655,7 +655,14 @@ components:
         images:
           type: array
           items:
-            type: string
+            type: object
+            properties:
+              filename:
+                type: string
+                example: name-of-your-image.png
+              url:
+                type: string
+                example: http://localhost/static/name-of-your-image.png
           description: Url of your image
         feature:
           type: array
@@ -683,11 +690,13 @@ components:
           type: string
           example: Nguyen Thi Minh Khai
         ward:
-          type: object
-          example: {id: "26920", name: "25"}
+          type: string
+          example: 5d5fa766f54a927d45807adb
+          description: _id of ward
         district:
           type: object
-          example: {id: "760", name: "01"}
+          example: 5d5fa766f54a623d45807dcb
+          description: _id of district
         city:
           type: string
           example: HCM City
