@@ -23,7 +23,15 @@ const apply = app => {
   // handle application/json
   app.use(bodyparser.json());
   app.use(bodyparser.urlencoded({ extended: false }));
-  app.use(cors());
+  app.use(
+    cors({
+      origin: '*',
+      methods: 'GET,PUT,POST,DELETE',
+      preflightContinue: false,
+      optionsSuccessStatus: 204,
+      maxAge: 86400,
+    })
+  );
 
   // handle cache ip for limit request
   app.use(
