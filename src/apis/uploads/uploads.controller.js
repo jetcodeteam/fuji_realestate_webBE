@@ -10,7 +10,7 @@ router.post(
   (req, res) => {
     res.send({
       filename: `${req.file.originalname}`,
-      url: `${req.protocol}://${req.headers.host}/static/${req.file.filename}`,
+      url: `${process.env.NODE_ENV !== 'production' ? req.protocol: 'https' }://${req.headers.host}/static/${req.file.filename}`,
     });
   }
 );
