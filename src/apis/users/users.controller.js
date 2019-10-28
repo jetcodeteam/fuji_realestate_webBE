@@ -21,7 +21,7 @@ router.post('/login', (req, res) => {
 // eslint-disable-next-line consistent-return
 router.post('/forgotpassword', (req, res) => {
   switch (req.query.action) {
-    case 'user': {
+    case 'password': {
       return passport.authenticate(
         'local',
         { session: false },
