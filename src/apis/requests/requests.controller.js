@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-const crud = require('../../utils/crud');
+const crud = require('../crud');
 const authorizeAgent = require('../../middlewares/authorizeAgent');
 const Requests = require('./request');
 

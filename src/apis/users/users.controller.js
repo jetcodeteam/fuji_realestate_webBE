@@ -18,13 +18,44 @@ router.post('/login', (req, res) => {
   })(req, res);
 });
 
+// eslint-disable-next-line consistent-return
 router.post('/forgotpassword', (req, res) => {
-  const { email } = req.body;
-  service.sendEmailForgotPassword(
-    email,
-    `${req.protocol}://${req.headers.host}/users/verify`
-  );
-  return res.status(200).send({ message: 'Send email successfully' });
+  switch (req.query.action) {
+    case 'user': {
+      return passport.authenticate(
+        'local',
+        { session: false },
+        async (err, user, info) => {
+          try {
+            if (user) {
+              const { newpassword } = req.body;
+              user.hashPassword(newpassword);
+              const docs = await user.save();
+              return res
+                .status(200)
+                .send({ message: 'Reset password successfully', user: docs });
+            }
+            return res.status(400).json({ message: info });
+          } catch (error) {
+            return res.status(500).json({ message: error });
+          }
+        }
+      )(req, res);
+    }
+    case 'email': {
+      const { email } = req.body;
+      service.sendEmailForgotPassword(
+        email,
+        `${req.protocol}://${req.headers.host}/users/verify`
+      );
+      return res.status(200).send({ message: 'Send email successfully' });
+    }
+    default: {
+      return res.status(404).json({
+        message: 'Action not found',
+      });
+    }
+  }
 });
 
 router.get(
