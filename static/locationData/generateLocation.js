@@ -42,7 +42,6 @@ const createWard = async district => {
     district.ward.push(newWard);
   }
   await district.save();
-  console.log(district);
 };
 
 // Main
