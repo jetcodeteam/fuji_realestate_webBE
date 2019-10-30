@@ -1,54 +1,4 @@
 {
-    "27043": {
-        "name": "04",
-        "type": "phuong",
-        "slug": "04",
-        "name_with_type": "Phường 04",
-        "path": "04, Phú Nhuận, Hồ Chí Minh",
-        "path_with_type": "Phường 04, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
-        "code": "27043",
-        "parent_code": "768"
-    },
-    "27046": {
-        "name": "05",
-        "type": "phuong",
-        "slug": "05",
-        "name_with_type": "Phường 05",
-        "path": "05, Phú Nhuận, Hồ Chí Minh",
-        "path_with_type": "Phường 05, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
-        "code": "27046",
-        "parent_code": "768"
-    },
-    "27049": {
-        "name": "09",
-        "type": "phuong",
-        "slug": "09",
-        "name_with_type": "Phường 09",
-        "path": "09, Phú Nhuận, Hồ Chí Minh",
-        "path_with_type": "Phường 09, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
-        "code": "27049",
-        "parent_code": "768"
-    },
-    "27052": {
-        "name": "07",
-        "type": "phuong",
-        "slug": "07",
-        "name_with_type": "Phường 07",
-        "path": "07, Phú Nhuận, Hồ Chí Minh",
-        "path_with_type": "Phường 07, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
-        "code": "27052",
-        "parent_code": "768"
-    },
-    "27055": {
-        "name": "03",
-        "type": "phuong",
-        "slug": "03",
-        "name_with_type": "Phường 03",
-        "path": "03, Phú Nhuận, Hồ Chí Minh",
-        "path_with_type": "Phường 03, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
-        "code": "27055",
-        "parent_code": "768"
-    },
     "27058": {
         "name": "01",
         "type": "phuong",
@@ -69,6 +19,46 @@
         "code": "27061",
         "parent_code": "768"
     },
+    "27055": {
+        "name": "03",
+        "type": "phuong",
+        "slug": "03",
+        "name_with_type": "Phường 03",
+        "path": "03, Phú Nhuận, Hồ Chí Minh",
+        "path_with_type": "Phường 03, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
+        "code": "27055",
+        "parent_code": "768"
+    },
+    "27043": {
+        "name": "04",
+        "type": "phuong",
+        "slug": "04",
+        "name_with_type": "Phường 04",
+        "path": "04, Phú Nhuận, Hồ Chí Minh",
+        "path_with_type": "Phường 04, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
+        "code": "27043",
+        "parent_code": "768"
+    },
+    "27046": {
+        "name": "05",
+        "type": "phuong",
+        "slug": "05",
+        "name_with_type": "Phường 05",
+        "path": "05, Phú Nhuận, Hồ Chí Minh",
+        "path_with_type": "Phường 05, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
+        "code": "27046",
+        "parent_code": "768"
+    },
+    "27052": {
+        "name": "07",
+        "type": "phuong",
+        "slug": "07",
+        "name_with_type": "Phường 07",
+        "path": "07, Phú Nhuận, Hồ Chí Minh",
+        "path_with_type": "Phường 07, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
+        "code": "27052",
+        "parent_code": "768"
+    },
     "27064": {
         "name": "08",
         "type": "phuong",
@@ -79,14 +69,14 @@
         "code": "27064",
         "parent_code": "768"
     },
-    "27067": {
-        "name": "15",
+    "27049": {
+        "name": "09",
         "type": "phuong",
-        "slug": "15",
-        "name_with_type": "Phường 15",
-        "path": "15, Phú Nhuận, Hồ Chí Minh",
-        "path_with_type": "Phường 15, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
-        "code": "27067",
+        "slug": "09",
+        "name_with_type": "Phường 09",
+        "path": "09, Phú Nhuận, Hồ Chí Minh",
+        "path_with_type": "Phường 09, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
+        "code": "27049",
         "parent_code": "768"
     },
     "27070": {
@@ -109,26 +99,6 @@
         "code": "27073",
         "parent_code": "768"
     },
-    "27076": {
-        "name": "17",
-        "type": "phuong",
-        "slug": "17",
-        "name_with_type": "Phường 17",
-        "path": "17, Phú Nhuận, Hồ Chí Minh",
-        "path_with_type": "Phường 17, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
-        "code": "27076",
-        "parent_code": "768"
-    },
-    "27079": {
-        "name": "14",
-        "type": "phuong",
-        "slug": "14",
-        "name_with_type": "Phường 14",
-        "path": "14, Phú Nhuận, Hồ Chí Minh",
-        "path_with_type": "Phường 14, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
-        "code": "27079",
-        "parent_code": "768"
-    },
     "27082": {
         "name": "12",
         "type": "phuong",
@@ -147,6 +117,36 @@
         "path": "13, Phú Nhuận, Hồ Chí Minh",
         "path_with_type": "Phường 13, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
         "code": "27085",
+        "parent_code": "768"
+    },
+    "27079": {
+        "name": "14",
+        "type": "phuong",
+        "slug": "14",
+        "name_with_type": "Phường 14",
+        "path": "14, Phú Nhuận, Hồ Chí Minh",
+        "path_with_type": "Phường 14, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
+        "code": "27079",
+        "parent_code": "768"
+    },
+    "27067": {
+        "name": "15",
+        "type": "phuong",
+        "slug": "15",
+        "name_with_type": "Phường 15",
+        "path": "15, Phú Nhuận, Hồ Chí Minh",
+        "path_with_type": "Phường 15, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
+        "code": "27067",
+        "parent_code": "768"
+    },
+    "27076": {
+        "name": "17",
+        "type": "phuong",
+        "slug": "17",
+        "name_with_type": "Phường 17",
+        "path": "17, Phú Nhuận, Hồ Chí Minh",
+        "path_with_type": "Phường 17, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
+        "code": "27076",
         "parent_code": "768"
     }
 }

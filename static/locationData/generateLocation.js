@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 /* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 const fs = require('fs');
@@ -25,15 +26,11 @@ const createDistrict = districtInfo => {
   });
 };
 
-const createWard = district => {
+const createWard = async district => {
   const rawWards = fs.readFileSync(`${__dirname}/${district.code}.json`);
   const wards = JSON.parse(rawWards);
   const wardIds = Object.keys(wards);
-  (function next(index) {
-    if (index === wardIds.length) {
-      // No items left
-      return;
-    }
+  for (let index = 0; index < wardIds.length; index += 1) {
     const wardId = wardIds[index];
     const wardInfo = wards[wardId];
     const ward = new Ward({
@@ -41,46 +38,39 @@ const createWard = district => {
       ...wardInfo,
       district: district._id,
     });
-    ward.save(err => {
-      if (err) console.log(err);
-      district.ward.push(ward);
-      district.save(err1 => {
-        if (err1) console.log(err1);
-        next(index + 1);
-      });
-    });
-  })(0);
+    const newWard = await ward.save();
+    district.ward.push(newWard);
+  }
+  await district.save();
+  console.log(district);
 };
 
 // Main
-const rawDistricts = fs.readFileSync(`${__dirname}/districts.json`);
-const districts = JSON.parse(rawDistricts);
 
-const generateDistricWard = () => {
-  District.countDocuments().then(total => {
-    console.log('🎉 Generating districts & wards ...');
-    if (total === 0) {
-      (function next(index) {
-        if (index === districts.length) {
-          // No items left
-          setTimeout(() => {
-            mongoose.disconnect();
-          }, 2000);
-          console.log('🎉 Completed task');
-          process.exit(0);
-          return;
-        }
-        const districtInfo = districts[index];
-        createDistrict(districtInfo).then(district => {
-          createWard(district);
-          next(index + 1);
-        });
-      })(0);
-    } else {
-      console.log('🎉 Districts & wards are already exists');
-      process.exit(0);
+const generateDistricWard = async () => {
+  console.log('🎉 Generating districts & wards ...');
+  const total = await District.countDocuments();
+  if (total === 0) {
+    try {
+      const rawDistricts = fs.readFileSync(`${__dirname}/districts.json`);
+      const districts = JSON.parse(rawDistricts);
+      for (let index = 0; index < districts.length; index += 1) {
+        const element = districts[index];
+        console.log(`⇒ ${element.name_with_type}`);
+        const newdistrict = await createDistrict(element);
+        await createWard(newdistrict);
+      }
+      console.log('🎉 Completed task');
+    } catch (error) {
+      console.log(error);
+      console.log('😖😖😖 Processing error ...');
+      process.exit(1);
     }
-  });
+  } else {
+    console.log('🎉 Districts & wards are already exists');
+  }
+  mongoose.disconnect();
+  process.exit(0);
 };
 
 generateDistricWard();
