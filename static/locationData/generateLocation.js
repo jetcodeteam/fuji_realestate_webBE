@@ -29,10 +29,8 @@ const createDistrict = districtInfo => {
 const createWard = async district => {
   const rawWards = fs.readFileSync(`${__dirname}/${district.code}.json`);
   const wards = JSON.parse(rawWards);
-  const wardIds = Object.keys(wards);
-  for (let index = 0; index < wardIds.length; index += 1) {
-    const wardId = wardIds[index];
-    const wardInfo = wards[wardId];
+  for (let index = 0; index < wards.length; index += 1) {
+    const wardInfo = wards[index];
     const ward = new Ward({
       _id: mongoose.Types.ObjectId(),
       ...wardInfo,

@@ -1,5 +1,5 @@
-{
-    "27184": {
+[
+    {
         "name": "01",
         "type": "phuong",
         "slug": "01",
@@ -9,7 +9,7 @@
         "code": "27184",
         "parent_code": "771"
     },
-    "27190": {
+    {
         "name": "02",
         "type": "phuong",
         "slug": "02",
@@ -19,7 +19,7 @@
         "code": "27190",
         "parent_code": "771"
     },
-    "27205": {
+    {
         "name": "03",
         "type": "phuong",
         "slug": "03",
@@ -29,7 +29,7 @@
         "code": "27205",
         "parent_code": "771"
     },
-    "27193": {
+    {
         "name": "04",
         "type": "phuong",
         "slug": "04",
@@ -39,7 +39,7 @@
         "code": "27193",
         "parent_code": "771"
     },
-    "27199": {
+    {
         "name": "05",
         "type": "phuong",
         "slug": "05",
@@ -49,7 +49,7 @@
         "code": "27199",
         "parent_code": "771"
     },
-    "27202": {
+    {
         "name": "06",
         "type": "phuong",
         "slug": "06",
@@ -59,7 +59,7 @@
         "code": "27202",
         "parent_code": "771"
     },
-    "27196": {
+    {
         "name": "07",
         "type": "phuong",
         "slug": "07",
@@ -69,7 +69,7 @@
         "code": "27196",
         "parent_code": "771"
     },
-    "27187": {
+    {
         "name": "08",
         "type": "phuong",
         "slug": "08",
@@ -79,7 +79,7 @@
         "code": "27187",
         "parent_code": "771"
     },
-    "27181": {
+    {
         "name": "09",
         "type": "phuong",
         "slug": "09",
@@ -89,7 +89,7 @@
         "code": "27181",
         "parent_code": "771"
     },
-    "27178": {
+    {
         "name": "10",
         "type": "phuong",
         "slug": "10",
@@ -99,7 +99,7 @@
         "code": "27178",
         "parent_code": "771"
     },
-    "27175": {
+    {
         "name": "11",
         "type": "phuong",
         "slug": "11",
@@ -109,7 +109,7 @@
         "code": "27175",
         "parent_code": "771"
     },
-    "27172": {
+    {
         "name": "12",
         "type": "phuong",
         "slug": "12",
@@ -119,7 +119,7 @@
         "code": "27172",
         "parent_code": "771"
     },
-    "27166": {
+    {
         "name": "13",
         "type": "phuong",
         "slug": "13",
@@ -129,7 +129,7 @@
         "code": "27166",
         "parent_code": "771"
     },
-    "27169": {
+    {
         "name": "14",
         "type": "phuong",
         "slug": "14",
@@ -139,7 +139,7 @@
         "code": "27169",
         "parent_code": "771"
     },
-    "27163": {
+    {
         "name": "15",
         "type": "phuong",
         "slug": "15",
@@ -149,4 +149,4 @@
         "code": "27163",
         "parent_code": "771"
     }
-}
+]

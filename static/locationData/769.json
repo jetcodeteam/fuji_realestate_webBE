@@ -1,5 +1,5 @@
-{
-    "27088": {
+[
+    {
         "name": "Thảo Điền",
         "type": "phuong",
         "slug": "thao-dien",
@@ -9,7 +9,7 @@
         "code": "27088",
         "parent_code": "769"
     },
-    "27091": {
+    {
         "name": "An Phú",
         "type": "phuong",
         "slug": "an-phu",
@@ -19,7 +19,7 @@
         "code": "27091",
         "parent_code": "769"
     },
-    "27094": {
+    {
         "name": "Bình An",
         "type": "phuong",
         "slug": "binh-an",
@@ -29,7 +29,7 @@
         "code": "27094",
         "parent_code": "769"
     },
-    "27097": {
+    {
         "name": "Bình Trưng Đông",
         "type": "phuong",
         "slug": "binh-trung-dong",
@@ -39,7 +39,7 @@
         "code": "27097",
         "parent_code": "769"
     },
-    "27100": {
+    {
         "name": "Bình Trưng Tây",
         "type": "phuong",
         "slug": "binh-trung-tay",
@@ -49,7 +49,7 @@
         "code": "27100",
         "parent_code": "769"
     },
-    "27103": {
+    {
         "name": "Bình Khánh",
         "type": "phuong",
         "slug": "binh-khanh",
@@ -59,7 +59,7 @@
         "code": "27103",
         "parent_code": "769"
     },
-    "27106": {
+    {
         "name": "An Khánh",
         "type": "phuong",
         "slug": "an-khanh",
@@ -69,7 +69,7 @@
         "code": "27106",
         "parent_code": "769"
     },
-    "27109": {
+    {
         "name": "Cát Lái",
         "type": "phuong",
         "slug": "cat-lai",
@@ -79,7 +79,7 @@
         "code": "27109",
         "parent_code": "769"
     },
-    "27112": {
+    {
         "name": "Thạnh Mỹ Lợi",
         "type": "phuong",
         "slug": "thanh-my-loi",
@@ -89,7 +89,7 @@
         "code": "27112",
         "parent_code": "769"
     },
-    "27115": {
+    {
         "name": "An Lợi Đông",
         "type": "phuong",
         "slug": "an-loi-dong",
@@ -99,7 +99,7 @@
         "code": "27115",
         "parent_code": "769"
     },
-    "27118": {
+    {
         "name": "Thủ Thiêm",
         "type": "phuong",
         "slug": "thu-thiem",
@@ -109,4 +109,4 @@
         "code": "27118",
         "parent_code": "769"
     }
-}
+]
