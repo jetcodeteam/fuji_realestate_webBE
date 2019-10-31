@@ -23,16 +23,22 @@ const getPage = (model, populate) => async (req, res) => {
   let order = req.query.order || 'DESC';
   try {
     order = order.toLowerCase();
-    const total = await model.countDocuments();
+    const total = await model
+      .find(filter)
+      .lean()
+      .count()
+      .exec();
+
     let docs = model
       .find(filter)
+      .lean()
       .sort({ [sort]: order })
       .limit(Number(limit))
       .skip(Number(offset));
     if (populate) {
       populate.forEach(item => docs.populate(item));
     }
-    docs = await docs.lean().exec();
+    docs = await docs.exec();
     res.setHeader('Access-Control-Expose-Headers', 'Content-Range');
     res.setHeader('Content-Range', `${offset}-${limit}/${total}`);
     res.status(200).json({ data: docs });
