@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
+// const path = require('path');
 const middlewares = require('./middlewares');
 
 // root api
@@ -12,7 +12,7 @@ const apiRouter = require('./apis');
 const app = express();
 
 // serve static
-app.use('/static', express.static(path.join(__dirname, '../uploads')));
+// app.use('/static', express.static(path.join(__dirname, '../uploads')));
 
 // init middlewares
 middlewares.apply(app);
