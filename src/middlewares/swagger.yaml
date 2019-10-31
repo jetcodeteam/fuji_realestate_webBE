@@ -19,7 +19,7 @@ tags:
     description: Everything about Articles
   - name: Products
     description: Everything about Products
-  
+
 paths:
   /requests:
     get:
@@ -584,7 +584,27 @@ paths:
                     type: string
                     example: http://localhost/static/name-of-your-image.png
         '400':
-          description: Username or password is invalid
+          description: Fail to operate this action
+    delete:
+      tags:
+        - Uploads
+      operationId: DeleteImage
+      summary: Delete image in server
+      parameters:
+        - in: query
+          name: path
+          required: true
+          schema:
+            type: string
+            default: ''
+          description: Path upload of image
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Delete image successfully
+        '400':
+          description: Fail to operate this action
   /districts:
     get:
       tags:
@@ -849,7 +869,7 @@ components:
       required: true
       schema:
         type: number
-        default: "0"
+        default: '0'
       description: The number of items to skip.
     limitParam:
       in: query

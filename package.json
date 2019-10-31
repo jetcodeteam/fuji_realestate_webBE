@@ -1,6 +1,6 @@
 {
   "name": "fuji_realestate_web_be",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "main": "server.js",
   "scripts": {
     "seed:location": "node static/locationData/generateLocation.js",

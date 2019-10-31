@@ -1,7 +1,9 @@
 const router = require('express').Router();
+const passport = require('passport');
 
 // handle upload file from request with content-type: application/form-data
 const uploadFile = require('../middlewares/multer');
+const authorizeAgent = require('../middlewares/authorizeAgent');
 
 // routes api
 const articles = require('./articles/articles.module');
@@ -19,7 +21,12 @@ router.use('/requests', uploadFile.none(), requests.controller);
 router.use('/products', uploadFile.none(), products.controller);
 router.use('/districts', uploadFile.none(), districts.controller);
 router.use('/wards', uploadFile.none(), wards.controller);
-router.use('/uploads', uploadFile.single('upload'), uploads.controller);
+router.use(
+  '/uploads',
+  passport.authenticate('jwt', { session: false }),
+  authorizeAgent,
+  uploads.controller
+);
 router.use('/articles', uploadFile.none(), articles.controller);
 
 module.exports = router;

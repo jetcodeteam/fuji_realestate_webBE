@@ -23,7 +23,7 @@ const getPage = (model, populate) => async (req, res) => {
   let order = req.query.order || 'DESC';
   try {
     order = order.toLowerCase();
-    const total = await model.count();
+    const total = await model.countDocuments();
     let docs = model
       .find(filter)
       .sort({ [sort]: order })
