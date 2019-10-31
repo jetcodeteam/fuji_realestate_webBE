@@ -25,7 +25,7 @@ const apply = app => {
   app.use(bodyparser.urlencoded({ extended: false }));
   app.use(
     cors({
-      origin: 'https://fujiwara-realestate.com',
+      origin: ['https://fujiwara-realestate.com', 'http://localhost:3000'],
       methods: 'GET,PUT,POST,DELETE',
       preflightContinue: false,
       optionsSuccessStatus: 204,
