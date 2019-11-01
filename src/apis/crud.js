@@ -26,7 +26,7 @@ const getPage = (model, populate) => async (req, res) => {
     const total = await model
       .find(filter)
       .lean()
-      .count()
+      .countDocuments()
       .exec();
 
     let docs = model
