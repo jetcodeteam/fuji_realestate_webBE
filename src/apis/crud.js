@@ -91,7 +91,7 @@ const updateOne = model => async (req, res) => {
 const deleteImage = path => {
   const image = path.split('/').slice(-1)[0];
   fs.unlink(`${__dirname}/../../uploads/${image}`, e => {
-    logger(e);
+    if (e) logger('delete image', e);
   });
 };
 

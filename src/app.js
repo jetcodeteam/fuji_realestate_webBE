@@ -22,6 +22,7 @@ mongoose.connect(process.env.MONGODB_URI_JETCODE, {
   useNewUrlParser: true,
   autoIndex: false,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 if (process.env.NODE_ENV === 'development') mongoose.set('debug', true);
 
