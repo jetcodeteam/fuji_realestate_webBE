@@ -3,17 +3,23 @@ const cors = require('cors');
 const RateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const YAML = require('yamljs');
+const rfs = require('rotating-file-stream');
+const path = require('path');
 const swaggerUi = require('swagger-ui-express');
 const logger = require('morgan');
-const getStore = require('./redisClient');
 
+const getStore = require('./redisClient');
 // register strategy local, jwt
 require('./passport');
 
 // apply middleware
 const apply = app => {
-  app.use(logger('combined'));
-
+  const accessLogStream = rfs('access.log', {
+    size: '1G',
+    interval: '3M', // rotate daily
+    path: path.join(__dirname, '../../log'),
+  });
+  app.use(logger('combined', { stream: accessLogStream }));
   // secure http
   app.use(
     helmet({

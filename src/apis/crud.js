@@ -1,3 +1,8 @@
+/* eslint-disable no-console */
+const fs = require('fs');
+
+const logger = require('../middlewares/errorlog');
+
 const getOne = (model, populate) => async (req, res) => {
   try {
     let doc = model.findOne({ _id: req.params.id });
@@ -11,6 +16,7 @@ const getOne = (model, populate) => async (req, res) => {
     }
     return res.status(200).json({ data: doc });
   } catch (e) {
+    logger(`get ${model.collection.collectionName}`, e);
     return res.status(400).json({ message: e });
   }
 };
@@ -43,6 +49,7 @@ const getPage = (model, populate) => async (req, res) => {
     res.setHeader('Content-Range', `${offset}-${limit}/${total}`);
     res.status(200).json({ data: docs });
   } catch (e) {
+    logger(`get pagination ${model.collection.collectionName}`, e);
     res.status(400).json({ message: e });
   }
 };
@@ -52,7 +59,8 @@ const createOne = model => async (req, res) => {
     const doc = await model.create({ ...req.body });
     return res.status(201).json({ data: doc });
   } catch (e) {
-    return res.status(400).json({ message: e });
+    logger(`create ${model.collection.collectionName}`, e);
+    return res.status(400).json({ message: 'Bad request' });
   }
 };
 
@@ -75,12 +83,40 @@ const updateOne = model => async (req, res) => {
 
     return res.status(200).json({ data: updatedDoc });
   } catch (e) {
+    logger(`update ${model.collection.collectionName}`, e);
     return res.status(400).json({ message: 'Request not found' });
   }
 };
 
+const deleteImage = path => {
+  const image = path.split('/').slice(-1)[0];
+  fs.unlink(`${__dirname}/../../../uploads/${image}`, e => {
+    logger(e);
+  });
+};
+
 const removeOne = model => async (req, res) => {
   try {
+    switch (model.collection.collectionName.toLowerCase()) {
+      case 'products': {
+        const doc = await model.findOne({
+          _id: req.params.id,
+        });
+        doc.images.forEach(value => {
+          deleteImage(value.url);
+        });
+        break;
+      }
+      case 'articles': {
+        const doc = await model.findOne({
+          _id: req.params.id,
+        });
+        deleteImage(doc.thumbnail.url);
+        break;
+      }
+      default:
+        break;
+    }
     const removed = await model.findOneAndRemove({
       _id: req.params.id,
     });
@@ -91,6 +127,7 @@ const removeOne = model => async (req, res) => {
 
     return res.status(200).json({ data: removed });
   } catch (e) {
+    logger(`remove ${model.collection.collectionName}`, e);
     return res.status(400).json({ message: 'Invalid ID supplied' });
   }
 };

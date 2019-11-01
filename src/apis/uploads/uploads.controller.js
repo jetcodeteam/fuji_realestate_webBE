@@ -3,6 +3,7 @@
 const router = require('express').Router();
 const fs = require('fs');
 
+const logger = require('../../middlewares/errorlog');
 const uploadFile = require('../../middlewares/multer');
 
 router.post('', uploadFile.single('upload'), (req, res) => {
@@ -25,9 +26,10 @@ router.delete('', (req, res) => {
             message: 'image not found',
           });
         }
+        logger(`process delete image`, e);
         return res.status(400).json({
           name: path,
-          message: e,
+          message: 'Bad request',
         });
       }
       return res.status(200).json({
@@ -35,6 +37,7 @@ router.delete('', (req, res) => {
       });
     });
   } catch (error) {
+    logger(`delete image`, error);
     return res.status(500).json({
       name: path,
       message: error,
