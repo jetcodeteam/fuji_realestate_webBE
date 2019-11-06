@@ -74,7 +74,7 @@ UserSchema.methods.toAuthJSON = function(userAgent) {
       },
       SERCETKEY,
       {
-        expiresIn: '1d',
+        expiresIn: '3d',
       }
     ),
   };
