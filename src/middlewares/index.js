@@ -3,8 +3,8 @@ const cors = require('cors');
 const RateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const YAML = require('yamljs');
-const rfs = require('rotating-file-stream');
-const path = require('path');
+// const rfs = require('rotating-file-stream');
+// const path = require('path');
 const swaggerUi = require('swagger-ui-express');
 const logger = require('morgan');
 
@@ -14,12 +14,13 @@ require('./passport');
 
 // apply middleware
 const apply = app => {
-  const accessLogStream = rfs('access.log', {
-    size: '1G',
-    interval: '3M', // rotate daily
-    path: path.join(__dirname, '../../log'),
-  });
-  app.use(logger('combined', { stream: accessLogStream }));
+  // const accessLogStream = rfs('access.log', {
+  //   size: '1G',
+  //   interval: '3M', // rotate daily
+  //   path: path.join(__dirname, '../../log'),
+  // });
+  // app.use(logger('combined', { stream: accessLogStream }));
+  app.use(logger('combined'));
   // secure http
   app.use(
     helmet({
