@@ -44,8 +44,8 @@ const apply = app => {
   app.use(
     new RateLimit({
       store: getStore(),
-      windowMs: 15 * 60 * 1000,
-      max: 1000,
+      windowMs: 1 * 60 * 1000,
+      max: 100,
     })
   );
 
