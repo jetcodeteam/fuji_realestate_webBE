@@ -28,8 +28,8 @@ router.post('/forgotpassword', (req, res) => {
         async (err, user, info) => {
           try {
             if (user) {
-              const { newpassword } = req.body;
-              user.hashPassword(newpassword);
+              const { newPassword } = req.body;
+              user.hashPassword(newPassword);
               const docs = await user.save();
               return res
                 .status(200)
