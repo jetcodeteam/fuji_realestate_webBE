@@ -41,13 +41,13 @@ const apply = app => {
   );
 
   // handle cache ip for limit request
-  // app.use(
-  //   new RateLimit({
-  //     store: getStore(),
-  //     windowMs: 15 * 60 * 1000,
-  //     max: 1000,
-  //   })
-  // );
+  app.use(
+    new RateLimit({
+      store: getStore(),
+      windowMs: 15 * 60 * 1000,
+      max: 1000,
+    })
+  );
 
   // setup swagger
   const swaggerDocument = YAML.load(`${__dirname}/swagger.yaml`);
