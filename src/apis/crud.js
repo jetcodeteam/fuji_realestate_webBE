@@ -89,8 +89,7 @@ const updateOne = model => async (req, res) => {
 };
 
 const deleteImage = path => {
-  const image = path.split('/').slice(-1)[0];
-  fs.unlink(`${__dirname}/../../uploads/${image}`, e => {
+  fs.unlink(`${__dirname}/../../uploads/${path}`, e => {
     if (e) logger('delete image', e);
   });
 };
@@ -103,7 +102,8 @@ const removeOne = model => async (req, res) => {
           _id: req.params.id,
         });
         doc.images.forEach(value => {
-          deleteImage(value.url);
+          const image = value.url.split('/').slice(-1)[0];
+          deleteImage(image);
         });
         break;
       }
@@ -111,7 +111,7 @@ const removeOne = model => async (req, res) => {
         const doc = await model.findOne({
           _id: req.params.id,
         });
-        deleteImage(doc.thumbnail.url);
+        deleteImage(doc.thumbnail);
         break;
       }
       default:
