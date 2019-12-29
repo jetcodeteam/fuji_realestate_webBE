@@ -2,32 +2,20 @@
 
 ## Installation
 
-### For MacOS
+### For MacOS, Linux, Win
 
 ```shell
-    npm install
-```
-
-### For Linux, Win
-
-```shell
-    npm install --no-optional
+    docker-compose build
 ```
 
 ## Development
 
 ```shell
-    npm run dev
+    docker-compose up
 ```
 
 ## Docs API
 
-Swagger UI at `host/swagger`
+Swagger UI at `http:localhost:3000/swagger`
 
 [How to docs api](https://github.com/Surnet/swagger-jsdoc/blob/master/docs/GETTING-STARTED.md)
-
-## Style Code
-
-```shell
-    npm run format
-```
