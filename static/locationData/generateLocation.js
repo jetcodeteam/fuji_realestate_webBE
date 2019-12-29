@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const District = require('../../src/apis/locations/district');
 const Ward = require('../../src/apis/locations/ward');
 
-mongoose.connect(process.env.MONGODB_URI_JETCODE, {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   autoIndex: false,
   useUnifiedTopology: true,

@@ -24,7 +24,7 @@ const seedData = async (username, email, pwd, role) => {
 };
 
 // connecting mongodb
-mongoose.connect(process.env.MONGODB_URI_JETCODE, {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   autoIndex: false,
   useUnifiedTopology: true,
