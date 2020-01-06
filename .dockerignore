@@ -1,0 +1,9 @@
+node_modules
+datadb
+.env
+.eslintrc
+.gitignore
+.prettierrc
+Dockerfile
+docker-compose.yml
+uploads

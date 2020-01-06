@@ -102,5 +102,6 @@ uploads/
 datadb/
 
 package-lock.json
+deployment.yaml
 
 # End of https://www.gitignore.io/api/node
