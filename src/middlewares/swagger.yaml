@@ -5,7 +5,7 @@ info:
   description: Fujiwara API Website
   contact:
     name: JetCode
-    email: jetcode@gmail.com
+    email: admin@jetcode.team
 tags:
   - name: Users
     description: Operations about user
